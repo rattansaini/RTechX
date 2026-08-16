@@ -205,8 +205,11 @@ export const itRecruitmentMasterclass: Course = {
     showSeatsLeft: true,
   },
 
-  // CONFIRM BEFORE LAUNCH — Rattan must approve these exact terms, since this
-  // is a financial commitment. Delete the whole block to remove the guarantee.
+  // Approved by Rattan on 2026-08-16. This is a binding financial commitment
+  // shown on the course page and echoed on /legal/refund-policy — changing the
+  // wording here changes both. The cut-off is deliberate: the refund window
+  // closes when Day 2 begins, so someone cannot take all three days and then
+  // ask for their money back.
   guarantee: {
     label: "Attend Day 1. Still not for you? Full refund.",
     body: "Sit through the first live session. If it isn’t what you expected, email us before Day 2 begins and we refund the full amount — no form, no argument.",
