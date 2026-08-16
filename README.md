@@ -4,7 +4,7 @@ Course-selling site for RTechX — an IT-recruitment training brand. Built as a
 multi-course academy from day one, even though one course is currently live.
 
 **Stack:** Next.js 15 (App Router) · TypeScript · Tailwind v4 · Supabase ·
-Razorpay · Resend · n8n · deployed on Vercel.
+Razorpay · Resend · n8n · deployed on Netlify.
 
 ---
 
@@ -165,36 +165,34 @@ to behave.
 
 ## Deployment
 
-Self-hosted on a Hostinger VPS via **Coolify**, which builds from the committed
-`Dockerfile` and redeploys on every push to `main`.
+**Netlify** — its free tier permits commercial use, and it runs a real Node
+runtime, so the Razorpay HMAC verification and the Resend calls work unchanged.
+Redeploys on every push to `main`.
 
-### One-time setup
+1. [app.netlify.com](https://app.netlify.com) → sign in with GitHub
+2. **Add new site → Import an existing project** → GitHub → `RTechX`
+3. Leave the build settings alone — `netlify.toml` sets them
+4. Add the environment variables from the table above **before** the first deploy
+5. Deploy
 
-1. **hPanel → VPS → OS & Panel → Change OS**, pick the **Coolify** template.
-   Takes about 10 minutes and wipes the server, so only do this on a VPS with
-   nothing you need on it.
-2. Open the Coolify URL hPanel gives you and create the admin account. Do this
-   promptly — until you do, the panel is unclaimed.
-3. **Sources → GitHub** → install the Coolify GitHub App, granting it access to
-   this repository only.
-4. **Projects → New → Application**, choose this repo, build pack **Dockerfile**.
-5. Add the environment variables (below), then deploy.
-6. **Domains** → set the domain and enable HTTPS. Coolify obtains the
-   Let's Encrypt certificate itself.
+`output: "standalone"` is disabled automatically on Netlify (their runtime does
+its own bundling and standalone output confuses it) and enabled everywhere
+else. The same repo deploys correctly to both without a flag.
+
+### Self-hosting instead (Docker / VPS / Coolify)
+
+The committed `Dockerfile` runs anywhere Docker does. It uses the standalone
+output, so the image is ~73MB and needs no production `npm install`.
 
 ### The build-time gotcha
 
 `NEXT_PUBLIC_*` values are **inlined into the browser bundle at build time**,
-not read when the container starts. In Coolify they must be marked as **build
-variables**, or the deployed site will have empty strings for the Razorpay key
-id, the Supabase URL and the pixel id — and checkout will fail with no obvious
-cause. The server-only secrets are read at runtime and don't need this.
+not read at startup. On Netlify that is automatic. On Coolify or plain Docker
+they must be passed as **build arguments** — the Dockerfile declares them as
+ARGs. Miss this and the deploy succeeds, the site loads, and checkout fails
+with an empty Razorpay key and no obvious cause.
 
-### Other hosts
-
-Any platform that runs a Docker image works unchanged. Vercel and Netlify also
-work and ignore both the Dockerfile and `output: "standalone"`. Shared hosting
-does not — Next.js needs a live Node process.
+Shared hosting will not work at all — Next.js needs a live Node process.
 
 Whatever you use, set `NEXT_PUBLIC_SITE_URL` to the production domain or the
 sitemap, canonical URLs and OG images will point at the wrong host.

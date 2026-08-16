@@ -1,0 +1,31 @@
+# Netlify build configuration.
+#
+# The Next.js Runtime is detected and installed automatically; it turns the
+# App Router's server routes into Netlify Functions and serves the prerendered
+# pages from the CDN. Nothing in the application code changes.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Security headers are also set in next.config.ts, which covers server-rendered
+# responses. These cover static assets served straight from the CDN, which
+# never touch the Next.js server.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Immutable build assets — safe to cache forever because the filenames are
+# content-hashed.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
