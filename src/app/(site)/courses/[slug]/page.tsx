@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { CareerScope } from "@/components/course/career-scope";
 import { CourseHero } from "@/components/course/hero";
+import { PriceHonesty } from "@/components/course/price-honesty";
 import {
   Audience,
   CertificatePreview,
@@ -15,6 +17,7 @@ import {
 import { FinalCtaBand } from "@/components/marketing/cta-band";
 import { FaqSection } from "@/components/marketing/faq";
 import { PainStrip } from "@/components/marketing/pain-strip";
+import { StatBand } from "@/components/marketing/stat-band";
 import { StickyCta } from "@/components/marketing/sticky-cta";
 import { UrgencyBar } from "@/components/marketing/urgency-bar";
 import { CourseJsonLd, FaqJsonLd } from "@/components/seo/json-ld";
@@ -82,6 +85,8 @@ export default async function CoursePage({
         />
       )}
 
+      <StatBand />
+
       {/* 3 */}
       <PainStrip painPoints={course.painPoints} />
 
@@ -93,6 +98,10 @@ export default async function CoursePage({
 
       {/* 6 */}
       <UpgradeBlock course={course} />
+
+      <CareerScope course={course} />
+
+      <PriceHonesty />
 
       {/* 7 */}
       <Pricing course={course} />

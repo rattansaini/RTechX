@@ -33,7 +33,16 @@ export function FaqSection({
           {faqs.map((f, i) => (
             <AccordionItem key={f.q} value={`faq-${i}`}>
               <AccordionTrigger>{f.q}</AccordionTrigger>
-              <AccordionContent>{f.a}</AccordionContent>
+              <AccordionContent>
+                {/* Answers may carry paragraph breaks. JSX collapses "\n\n" to
+                    a single space, so split explicitly or long answers render
+                    as one unbroken wall of text. */}
+                {f.a.split("\n\n").map((para, p) => (
+                  <p key={para.slice(0, 32)} className={p > 0 ? "mt-3" : undefined}>
+                    {para}
+                  </p>
+                ))}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

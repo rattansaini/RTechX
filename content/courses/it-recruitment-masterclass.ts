@@ -13,10 +13,9 @@ export const itRecruitmentMasterclass: Course = {
   title: "IT Recruitment Masterclass",
   shortTitle: "IT Recruitment Masterclass",
 
-  hookLine:
-    "From “I don’t understand the JD” to submitting a candidate with confidence — in 3 live evenings.",
+  hookLine: "Most recruiters can’t read the JD they’re hiring for.",
   subHook:
-    "A working IT-recruitment masterclass covering JD decoding, Boolean search, LinkedIn sourcing, ATS, resume screening, recruiter calls, submissions and onboarding. Live on Zoom. Recordings included.",
+    "That’s the gap. Three live evenings to close it — ₹499, or ₹999 with two live days on India and US hiring.",
   cardSummary:
     "Read a tech JD, build the Boolean, screen the candidate. Three live evenings, taught by a recruiter who still hires every day.",
 
@@ -219,6 +218,42 @@ export const itRecruitmentMasterclass: Course = {
   // real date. Supply both and it renders itself, then expires on its own.
   // priceRise: { newPriceINR: 0, effectiveFrom: "YYYY-MM-DD", appliesToTierId: "core" },
 
+  // Every figure quoted here is attributed in the section that renders it.
+  // Re-verify when the ISF publishes next quarter — see content/stats.ts.
+  careerScope: {
+    intro: [
+      "IT recruitment is one of the few technology-adjacent careers you can enter without a technical degree, from any graduate background, and be earning within months rather than years.",
+      "The market is real, and it is specific. India's IT staffing segment grew 16.1% year-on-year while general staffing grew 4%. Global Capability Centres — now around 2,120 of them across Bengaluru, Hyderabad, Pune, Chennai and NCR — are on track to hire over five lakh people in 2026, and their recruitment held up even while overall white-collar hiring fell 9% year-on-year.",
+      "Read that contrast carefully, because it's the honest picture: the broad job market is soft. Specialised technical hiring is the part that is still growing. Generalists are having a hard year. That is precisely the argument for specialising.",
+    ],
+    ladder: [
+      {
+        stage: "0–6 months",
+        role: "Sourcing associate, recruitment coordinator",
+        earnings: "₹15,000–₹25,000/month",
+      },
+      {
+        stage: "6 months – 2 yrs",
+        role: "IT recruiter, US IT recruiter",
+        earnings: "₹3–5 LPA, plus incentives and night-shift allowance",
+      },
+      {
+        stage: "2–5 yrs",
+        role: "Technical recruiter, account-facing recruiter",
+        earnings: "Commission per placement becomes the larger share",
+      },
+      {
+        stage: "5 yrs +",
+        role: "Niche specialist, team lead, TA partner",
+        earnings: "Cloud, cybersecurity and SAP niches pay the most",
+      },
+    ],
+    ladderNote:
+      "Ranges are indicative, drawn from PayScale, Glassdoor and Indeed India, mid-2026. Your actual offer depends on city, employer, shift and how well you interview.",
+    verifyPrompt:
+      'Want to check this yourself? Open Naukri and search "US IT Recruiter". Count how many say freshers welcome or 0–1 years. We\'d rather you verified the market than took our word for it.',
+  },
+
   // Uses the widest range Rattan's own market research cited (₹2,000 floor),
   // because claiming a ₹3,000 floor would contradict his own lower figure.
   marketAnchorNote:
@@ -264,6 +299,18 @@ export const itRecruitmentMasterclass: Course = {
     {
       q: "Is this only for US recruitment?",
       a: "No. Days 1–3 are global-aware and apply anywhere. Days 4 and 5 are the India and US specialisation, because those are the two markets that actually pay Indian recruiters.",
+    },
+    {
+      q: "Will this course get me a job?",
+      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India's IT staffing segment grew 16.1% year-on-year, GCCs are projected to hire over five lakh people in 2026, and a large share of US-staffing recruiter openings in India explicitly accept freshers. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
+    },
+    {
+      q: "Is IT recruitment a safe career with AI coming?",
+      a: "Safer than most, and for a specific reason: recruitment is one of the few functions where human review isn't just preferred, it's regulated. The EU AI Act classifies recruitment tools as high-risk and requires human oversight; New York City requires bias audits and candidate notice for automated hiring tools. Someone qualified has to review what the machine produces.\n\nThe realistic version is this: AI has absorbed the admin — screening, scheduling, ranking, first-draft outreach. What it can't do is judge whether a candidate's “5 years of Kubernetes” is real, decide when a hiring manager's requirement is unreasonable, or persuade a senior engineer to take the call. Those are the skills that now separate a recruiter who gets hired from one who doesn't, and they're what these five days are about.",
+    },
+    {
+      q: "I'm from a non-technical background. Is that a problem?",
+      a: "No — and it's the most common background among people who do this well. You are not learning to code. You are learning to recognise what a technology does, which skills genuinely belong together, and what evidence in a resume proves someone actually did the work. Day 1 starts from zero and assumes no prior technical knowledge.",
     },
   ],
 

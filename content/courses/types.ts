@@ -89,6 +89,25 @@ export type Urgency = {
   showSeatsLeft: boolean;
 };
 
+/**
+ * The career the course leads into: market context, an earnings ladder, and a
+ * prompt to go and verify the market rather than trust us.
+ *
+ * Lives in content rather than a component because the figures behind it are
+ * published on a schedule — when the ISF releases next quarter, this file is
+ * the only thing that changes.
+ */
+export type CareerScope = {
+  intro: string[]; // paragraphs
+  ladder: {
+    stage: string;
+    role: string;
+    earnings: string;
+  }[];
+  ladderNote: string; // the caveat line under the table
+  verifyPrompt: string; // the "check it yourself" callout
+};
+
 export type Course = {
   slug: string;
   status: "live" | "coming-soon";
@@ -117,6 +136,7 @@ export type Course = {
   guarantee?: Guarantee;
   /** Market comparison shown near pricing. Must be defensible. */
   marketAnchorNote?: string;
+  careerScope?: CareerScope;
   seo: {
     title: string;
     description: string;

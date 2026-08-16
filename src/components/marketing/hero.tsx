@@ -46,9 +46,8 @@ export function HomeHero() {
             </h1>
 
             <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ink-400 sm:text-lg">
-              You don&rsquo;t need to code. You need to read a tech JD, build the search,
-              and know whether the candidate is real. That&rsquo;s what we teach — live,
-              in 3 evenings, for ₹499.
+              AI took the entry-level recruiting job. This is how you get the one it
+              can&rsquo;t do.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
