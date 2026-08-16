@@ -43,7 +43,7 @@ export const site = {
 
 export const instructor = {
   name: "Rattan Saini",
-  role: "Talent Acquisition Specialist & Coach",
+  role: "Founder, RTechX | Recruitment Strategist, Trainer & Mentor",
   location: "Gurugram, India",
   linkedin: "https://www.linkedin.com/in/rattansaini/",
   photo: "/instructor/rattan.jpg",
