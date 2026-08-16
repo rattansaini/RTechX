@@ -27,11 +27,10 @@ export const site = {
 
   legal: {
     entity: "Vedaant Enterprises",
-    /** TODO_PROOF: registered address required on the T&C / refund pages. */
-    address: null as string | null,
+    /** Shown on the terms, privacy, refund and contact pages. Razorpay checks for it. */
+    address: "Ward No 18, Street of Moti Luhar, Barwala, Hisar, Haryana 125121",
     gstRegistered: true,
-    /** TODO_PROOF: GSTIN — needed on invoices. */
-    gstin: null as string | null,
+    gstin: "06FIQPD3056Q2ZM",
   },
 
   /**
