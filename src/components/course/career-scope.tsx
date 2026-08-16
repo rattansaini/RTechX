@@ -25,6 +25,7 @@ export function CareerScope({ course }: { course: Course }) {
             {para}
           </p>
         ))}
+        <p className="text-[0.75rem] leading-snug text-ink-400">{scope.introSource}</p>
       </div>
 
       <Reveal className="mt-10">

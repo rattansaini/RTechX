@@ -42,6 +42,11 @@ export function FaqSection({
                     {para}
                   </p>
                 ))}
+                {/* Answers that quote a figure carry its source, in the same
+                    muted style the stat tiles use. */}
+                {f.source && (
+                  <p className="mt-3 text-[0.75rem] leading-snug text-ink-400">{f.source}</p>
+                )}
               </AccordionContent>
             </AccordionItem>
           ))}

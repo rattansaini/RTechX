@@ -57,7 +57,12 @@ export type Day = {
 
 export type PainPoint = { emoji: string; line: string };
 
-export type Faq = { q: string; a: string };
+/**
+ * `source` is optional because most answers quote no figures. When an answer
+ * does cite one, this renders beneath it in the same muted attribution style
+ * the stat tiles use.
+ */
+export type Faq = { q: string; a: string; source?: string };
 
 /** A single line in the "what you get" stack. No rupee valuations — see README. */
 export type Inclusion = { title: string; detail: string };
@@ -99,6 +104,11 @@ export type Urgency = {
  */
 export type CareerScope = {
   intro: string[]; // paragraphs
+  /**
+   * REQUIRED. The intro quotes market figures, so it carries attribution for
+   * the same reason `Stat` does — enforced here rather than left to review.
+   */
+  introSource: string;
   ladder: {
     stage: string;
     role: string;
