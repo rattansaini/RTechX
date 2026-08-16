@@ -17,6 +17,8 @@ import { FaqSection } from "@/components/marketing/faq";
 import { PainStrip } from "@/components/marketing/pain-strip";
 import { StickyCta } from "@/components/marketing/sticky-cta";
 import { UrgencyBar } from "@/components/marketing/urgency-bar";
+import { CourseJsonLd, FaqJsonLd } from "@/components/seo/json-ld";
+import { TrackView } from "@/components/analytics/track-view";
 import { courseSlugs, getCourse, nextBatch, tierById } from "@/content/courses";
 import { site } from "@/lib/site";
 
@@ -61,6 +63,10 @@ export default async function CoursePage({
 
   return (
     <>
+      <TrackView event={{ name: "view_course", courseSlug: course.slug }} />
+      <CourseJsonLd course={course} />
+      <FaqJsonLd faqs={course.faqs} />
+
       {/* 1 */}
       <CourseHero course={course} />
 

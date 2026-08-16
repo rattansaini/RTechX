@@ -5,6 +5,7 @@ import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Loader2, Lock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 import { captureAttribution, readAttribution } from "@/lib/attribution";
 import { cn, formatINR } from "@/lib/utils";
 
@@ -183,6 +184,13 @@ export function CheckoutForm({
         return;
       }
 
+      track({
+        name: "begin_checkout",
+        courseSlug,
+        tierId,
+        valueINR: order.amountPaise / 100,
+      });
+
       const rzp = new window.Razorpay({
         key: order.keyId,
         amount: order.amountPaise,
@@ -211,6 +219,13 @@ export function CheckoutForm({
               setSubmitting(false);
               return;
             }
+            track({
+              name: "purchase",
+              courseSlug,
+              tierId,
+              valueINR: order.amountPaise / 100,
+              orderId: response.razorpay_order_id,
+            });
             router.push(`/thank-you?order=${encodeURIComponent(response.razorpay_order_id)}`);
           } catch {
             setError(

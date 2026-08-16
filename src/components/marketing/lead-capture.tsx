@@ -3,6 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 import { captureAttribution, readAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
@@ -64,6 +65,7 @@ export function EmailCaptureForm({
     setMessage("");
     try {
       await submitLead({ email, source, ...extra });
+      track({ name: "lead_submit", source });
       setStatus("done");
       setMessage(successMessage);
       setEmail("");

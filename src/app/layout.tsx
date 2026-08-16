@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { Analytics } from "@/components/analytics/analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -46,6 +45,10 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+/**
+ * Root layout holds only the document shell and fonts. Page chrome lives in
+ * the (site) route group, so /lp can opt out of it entirely.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -54,17 +57,8 @@ export default function RootLayout({
       <body
         className={`${bricolage.variable} ${inter.variable} ${jetbrains.variable} flex min-h-dvh flex-col`}
       >
-        <a
-          href="#main"
-          className="sr-only rounded-field bg-ink px-4 py-2 text-white focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        {children}
+        <Analytics />
       </body>
     </html>
   );
