@@ -21,7 +21,14 @@ export type Tier = {
   compareAtINR?: number;
   /** "3 days · 2 hrs/day · Live" */
   durationLabel: string;
+  /**
+   * What this tier adds. When `inheritsFrom` is set, list ONLY the extras —
+   * the parent's items are resolved automatically so the comparison matrix
+   * stays truthful without duplicating every line.
+   */
   includes: string[];
+  /** Tier whose includes this one also gets. */
+  inheritsFrom?: Tier["id"];
   /** Renders the "Most popular" flag. Exactly one tier should set this. */
   highlight?: boolean;
   razorpayNotes?: string;
@@ -160,6 +167,31 @@ export function nextBatch(course: Course, now: Date = new Date()): Batch | null 
 
 export function tierById(course: Course, id: Tier["id"]): Tier | undefined {
   return course.tiers.find((t) => t.id === id);
+}
+
+/**
+ * Everything a tier actually includes, parent items first.
+ *
+ * The tier card shows the short incremental list ("everything in X, plus…"),
+ * but the comparison matrix must use this — otherwise the upgrade tier reads
+ * as though it omits the handbook, recordings and certificate.
+ */
+export function resolvedIncludes(course: Course, tier: Tier): string[] {
+  const out: string[] = [];
+  const seenTiers = new Set<string>();
+
+  const walk = (t: Tier) => {
+    if (seenTiers.has(t.id)) return; // guards against a mis-edited cycle
+    seenTiers.add(t.id);
+    if (t.inheritsFrom) {
+      const parent = tierById(course, t.inheritsFrom);
+      if (parent) walk(parent);
+    }
+    for (const i of t.includes) if (!out.includes(i)) out.push(i);
+  };
+
+  walk(tier);
+  return out;
 }
 
 /** Price-rise notices expire on their own. */

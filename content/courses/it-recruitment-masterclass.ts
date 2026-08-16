@@ -155,8 +155,10 @@ export const itRecruitmentMasterclass: Course = {
       priceINR: 999,
       durationLabel: "5 days · 2 hrs/day · Live",
       highlight: true,
+      // Only the extras — core's items are resolved via `inheritsFrom`, which
+      // keeps the comparison matrix honest without repeating eight lines.
+      inheritsFrom: "core",
       includes: [
-        "Everything in the 3-day masterclass",
         "Day 4 — India hiring, sourced live on screen",
         "Day 5 — US hiring, sourced live on screen",
         "Real rate maths: markup vs gross margin",
