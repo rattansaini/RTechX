@@ -15,16 +15,17 @@
   --color-ink-400: #55688d; /* muted body on paper — 5.8:1 */
   --color-ink-300: #8b9ab6; /* muted body on navy  — 5.2:1 */
 
-  /* Blue — action. Base is the brand blue; -600/-700 are the AA-safe variants. */
-  --color-blue: #1d6ff2; /* fills, gradients, graphic accents */
-  --color-blue-600: #1560e0; /* button fill, white label — 5.6:1 */
-  --color-blue-700: #1149a8; /* link text on paper       — 7.1:1 */
-  --color-blue-200: #b9d3fb;
-  --color-blue-50: #eaf2fe;
+  /* Blue — action. Sampled straight off the logo ribbon (#0060F0), which
+     happens to clear 5.3:1 on white, so one value serves fills and text. */
+  --color-blue: #0060f0;
+  --color-blue-600: #0057d8; /* hover / pressed */
+  --color-blue-700: #0a45a8; /* link text on paper — 8.0:1 */
+  --color-blue-200: #b3d1fd;
+  --color-blue-50: #e8f1fe;
 
-  /* Cyan — accent and gradient only. Never carries text on a light surface. */
-  --color-cyan: #22c7e6;
-  --color-cyan-ink: #0b6d82; /* the one cyan allowed as text on paper — 5.4:1 */
+  /* Cyan — the logo's sky stop. Accent and gradient only. */
+  --color-cyan: #00a8f0;
+  --color-cyan-ink: #016c99; /* the one cyan allowed as text on paper — 5.8:1 */
 
   /* Green — reserved strictly for outcome / success signals */
   --color-green: #10b981;

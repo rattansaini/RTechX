@@ -50,7 +50,7 @@ export function Header() {
       <Container>
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
           <Link href="/" aria-label="RTechX home" className="shrink-0">
-            <Logo />
+            <Logo priority />
           </Link>
 
           <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">

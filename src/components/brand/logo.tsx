@@ -1,66 +1,40 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+import mark from "../../../public/brand/rtechx-logo.png";
 
 /**
- * The RTechX mark: a magnifier over a globe, navy -> blue -> cyan.
+ * The RTechX mark — the supplied ribbon logo, trimmed of its transparent
+ * padding and served through next/image. Statically imported so Next knows
+ * the intrinsic size at build time and reserves the box (no layout shift).
  *
- * Drawn inline as SVG rather than loaded from `/assets/rtechx-logo.png` so the
- * header costs no request and never shifts layout. To swap in the supplied PNG
- * later, replace the <svg> below with next/image — nothing else references it.
+ * The mark carries the brand's full spectrum. The interface around it stays
+ * navy/blue on purpose — see globals.css.
  */
-export function LogoMark({
-  className,
-  id = "rtx",
-}: {
-  className?: string;
-  /** Gradient ids must be unique per instance on a page. */
-  id?: string;
-}) {
+export function LogoMark({ className, priority }: { className?: string; priority?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 32 32"
-      fill="none"
+    <Image
+      src={mark}
+      alt=""
       aria-hidden="true"
-      className={cn("size-8", className)}
-    >
-      <defs>
-        <linearGradient id={`${id}-g`} x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#0A1F44" />
-          <stop offset="0.55" stopColor="#1D6FF2" />
-          <stop offset="1" stopColor="#22C7E6" />
-        </linearGradient>
-      </defs>
-      {/* globe */}
-      <circle cx="13.5" cy="13.5" r="10.5" stroke={`url(#${id}-g)`} strokeWidth="2.5" />
-      <path
-        d="M3 13.5h21M13.5 3c2.8 3 4.2 6.6 4.2 10.5S16.3 21 13.5 24c-2.8-3-4.2-6.6-4.2-10.5S10.7 6 13.5 3Z"
-        stroke={`url(#${id}-g)`}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        opacity="0.75"
-      />
-      {/* magnifier handle */}
-      <path
-        d="m21.6 21.6 7 7"
-        stroke="#22C7E6"
-        strokeWidth="3.2"
-        strokeLinecap="round"
-      />
-    </svg>
+      priority={priority}
+      className={cn("h-8 w-auto", className)}
+      sizes="64px"
+    />
   );
 }
 
 export function Logo({
   className,
   tone = "ink",
-  id,
+  priority,
 }: {
   className?: string;
   tone?: "ink" | "white";
-  id?: string;
+  priority?: boolean;
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark id={id} />
+      <LogoMark priority={priority} />
       <span
         className={cn(
           "font-display text-[1.375rem] font-extrabold tracking-tight",
@@ -68,7 +42,7 @@ export function Logo({
         )}
       >
         RTech
-        <span className={tone === "white" ? "text-cyan" : "text-blue-600"}>X</span>
+        <span className={tone === "white" ? "text-cyan" : "text-blue"}>X</span>
       </span>
     </span>
   );
