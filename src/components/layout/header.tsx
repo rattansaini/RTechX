@@ -6,8 +6,12 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { flagshipCourse, tierById } from "@/content/courses";
 import { nav } from "@/lib/site";
-import { cn } from "@/lib/utils";
+import { cn, formatINR } from "@/lib/utils";
+
+const joinHref = `/courses/${flagshipCourse.slug}`;
+const corePrice = formatINR(tierById(flagshipCourse, "core")?.priceINR ?? 0);
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -67,7 +71,7 @@ export function Header() {
 
           <div className="flex items-center gap-2">
             <Button asChild size="sm" className="hidden sm:inline-flex">
-              <Link href="/courses/it-recruitment-masterclass">Join for ₹499</Link>
+              <Link href={joinHref}>Join for {corePrice}</Link>
             </Button>
 
             <button
@@ -103,11 +107,8 @@ export function Header() {
               </Link>
             ))}
             <Button asChild size="lg" full className="mt-3 mb-4">
-              <Link
-                href="/courses/it-recruitment-masterclass"
-                onClick={() => setOpen(false)}
-              >
-                Join the 3-day batch — ₹499
+              <Link href={joinHref} onClick={() => setOpen(false)}>
+                Join the 3-day batch — {corePrice}
               </Link>
             </Button>
           </nav>

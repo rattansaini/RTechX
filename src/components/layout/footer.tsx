@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
+import { liveCourses } from "@/content/courses";
 import { nav, site } from "@/lib/site";
 
 const columns = [
   {
     heading: "Courses",
     links: [
-      { href: "/courses/it-recruitment-masterclass", label: "IT Recruitment Masterclass" },
+      ...liveCourses.map((c) => ({
+        href: `/courses/${c.slug}`,
+        label: c.shortTitle,
+      })),
       { href: "/courses", label: "All courses" },
       { href: "/free-resources", label: "Free Boolean cheat-sheet" },
     ],

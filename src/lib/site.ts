@@ -42,16 +42,6 @@ export const site = {
     "RTechX training is educational. It is not immigration, legal or employment-law advice.",
 } as const;
 
-/**
- * Interim home for batch data so the hero has something real to render.
- * Step 2 moves this into the course content collection and deletes it here.
- */
-export const nextBatch = {
-  startDate: "2026-09-01",
-  timeIST: "8:00–10:00 PM IST",
-  seats: 20,
-} as const;
-
 export const instructor = {
   name: "Rattan Saini",
   role: "Talent Acquisition Specialist & Coach",

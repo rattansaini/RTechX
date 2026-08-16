@@ -3,8 +3,8 @@ import { Award, BookOpen, Radio } from "lucide-react";
 import { BooleanBuilder } from "@/components/marketing/boolean-builder";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { nextBatch } from "@/lib/site";
-import { formatBatchDate } from "@/lib/utils";
+import { flagshipCourse, nextBatch, tierById } from "@/content/courses";
+import { formatBatchDate, formatINR } from "@/lib/utils";
 
 const microProofs = [
   { icon: Radio, label: "Live, not recorded" },
@@ -13,6 +13,10 @@ const microProofs = [
 ];
 
 export function HomeHero() {
+  const batch = nextBatch(flagshipCourse);
+  const core = tierById(flagshipCourse, "core");
+  const corePrice = core ? formatINR(core.priceINR) : null;
+
   return (
     <section className="relative overflow-hidden">
       {/* Quiet dashboard field + one soft brand glow. Nothing else decorative. */}
@@ -32,7 +36,8 @@ export function HomeHero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-green opacity-60" />
                 <span className="relative inline-flex size-2 rounded-full bg-green" />
               </span>
-              Live online · Next batch {formatBatchDate(nextBatch.startDate)}
+              Live online
+              {batch && ` · Next batch ${formatBatchDate(batch.startDate)}`}
             </p>
 
             <h1 className="mt-6 text-[2.125rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
@@ -48,12 +53,12 @@ export function HomeHero() {
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg">
-                <Link href="/checkout/it-recruitment-masterclass?tier=core">
-                  Join the 3-day batch — ₹499
+                <Link href={`/checkout/${flagshipCourse.slug}?tier=core`}>
+                  Join the 3-day batch{corePrice && ` — ${corePrice}`}
                 </Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                <Link href="/courses/it-recruitment-masterclass#curriculum">
+                <Link href={`/courses/${flagshipCourse.slug}#curriculum`}>
                   See what&rsquo;s inside
                 </Link>
               </Button>
