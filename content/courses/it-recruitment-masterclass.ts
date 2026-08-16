@@ -223,12 +223,9 @@ export const itRecruitmentMasterclass: Course = {
   careerScope: {
     intro: [
       "IT recruitment is one of the few technology-adjacent careers you can enter without a technical degree, from any graduate background, and be earning within months rather than years.",
-      "The market is real, and it is specific. India's IT staffing segment grew 16.1% year-on-year while general staffing grew 4%. Global Capability Centres — now around 2,120 of them across Bengaluru, Hyderabad, Pune, Chennai and NCR — are on track to hire over five lakh people in 2026, and their recruitment held up even while overall white-collar hiring fell 9% year-on-year.",
+      "The market is real, and it is specific. India's IT staffing segment grew 16.1% year-on-year while general staffing grew 4%. Global Capability Centres — now around 2,120 of them across Bengaluru, Hyderabad, Pune, Chennai and NCR — are on track to hire over five lakh people in 2026.",
       "Read that contrast carefully, because it's the honest picture: the broad job market is soft. Specialised technical hiring is the part that is still growing. Generalists are having a hard year. That is precisely the argument for specialising.",
     ],
-    // TODO(rattan): the "white-collar hiring fell 9%" figure in the second
-    // paragraph is not covered by either source below — supply its publisher
-    // and date, or drop the clause.
     introSource:
       "Indian Staffing Federation, Flexi Staffing Employment Trends, Q3 FY2025-26 · foundit Insights Tracker, July 2026",
     ladder: [
@@ -259,10 +256,11 @@ export const itRecruitmentMasterclass: Course = {
       'Want to check this yourself? Open Naukri and search "US IT Recruiter". Count how many say freshers welcome or 0–1 years. We\'d rather you verified the market than took our word for it.',
   },
 
-  // Uses the widest range Rattan's own market research cited (₹2,000 floor),
-  // because claiming a ₹3,000 floor would contradict his own lower figure.
+  // Rattan confirmed the ₹3,000 floor. Must stay consistent with the price
+  // honesty band that renders directly above the pricing table — the two sat
+  // on the same screen quoting different floors.
   marketAnchorNote:
-    "Comparable live programmes are typically priced ₹2,000–₹25,000.",
+    "Comparable live programmes are typically priced ₹3,000–₹25,000.",
 
   faqs: [
     {
@@ -307,10 +305,7 @@ export const itRecruitmentMasterclass: Course = {
     },
     {
       q: "Will this course get me a job?",
-      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India's IT staffing segment grew 16.1% year-on-year, GCCs are projected to hire over five lakh people in 2026, and a large share of US-staffing recruiter openings in India explicitly accept freshers. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
-      // TODO(rattan): "a large share of US-staffing recruiter openings in India
-      // explicitly accept freshers" has no source. Supply one, or soften it to
-      // point at the Naukri self-check in the career section instead.
+      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India's IT staffing segment grew 16.1% year-on-year, and GCCs are projected to hire over five lakh people in 2026. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
       source:
         "Indian Staffing Federation, Flexi Staffing Employment Trends, Q3 FY2025-26 · foundit Insights Tracker, July 2026",
     },
