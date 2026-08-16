@@ -19,7 +19,14 @@ export async function notifyN8n(
   try {
     await fetch(url, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        // Identifies these calls in the n8n execution log. Note: do NOT turn
+        // on the webhook node's "Ignore Bots" option — it rejects any
+        // non-browser user agent with a 403, which silently drops every event
+        // sent from this server.
+        "user-agent": "RTechX-Site/1.0 (+https://www.rtechx.com)",
+      },
       body: JSON.stringify({ event, sentAt: new Date().toISOString(), data: payload }),
       signal: AbortSignal.timeout(4000),
       cache: "no-store",
