@@ -38,3 +38,42 @@
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Hold the prerendered marketing HTML at the edge.
+#
+# These pages are already static (Next marks them ● at build), but Netlify
+# still invoked a function to hand back HTML it had already generated, and the
+# cold start showed up as 780–1,140ms of server response time in Lighthouse —
+# the single largest component of LCP on mobile.
+#
+# `Netlify-CDN-Cache-Control` governs the edge only; the browser still gets a
+# short `Cache-Control`, so a visitor never sees stale copy after a deploy.
+# Netlify purges its CDN on every deploy, so the long s-maxage cannot outlive
+# a content change.
+#
+# Paths are listed explicitly and /api/* is deliberately absent. Caching a
+# checkout or webhook response at the edge would be a serious correctness bug
+# — one buyer could be served another buyer's order payload.
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, s-maxage=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/courses/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, s-maxage=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/lp/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, s-maxage=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/legal/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, s-maxage=86400, stale-while-revalidate=604800"
