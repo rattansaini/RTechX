@@ -44,7 +44,7 @@ export function Footer() {
               <p>
                 <a
                   href={`mailto:${site.supportEmail}`}
-                  className="transition-colors hover:text-cyan"
+                  className="inline-block py-1 transition-colors hover:text-cyan"
                 >
                   {site.supportEmail}
                 </a>
@@ -52,7 +52,7 @@ export function Footer() {
               <p>
                 <a
                   href={`https://wa.me/${site.whatsapp.e164}`}
-                  className="transition-colors hover:text-cyan"
+                  className="inline-block py-1 transition-colors hover:text-cyan"
                 >
                   WhatsApp {site.whatsapp.display}
                 </a>
@@ -61,7 +61,11 @@ export function Footer() {
             {socials.length > 0 && (
               <div className="mt-5 flex gap-4 text-[0.9375rem]">
                 {socials.map(([key, href]) => (
-                  <a key={key} href={href as string} className="capitalize hover:text-cyan">
+                  <a
+                    key={key}
+                    href={href as string}
+                    className="inline-block py-1 capitalize hover:text-cyan"
+                  >
                     {key}
                   </a>
                 ))}
@@ -74,10 +78,13 @@ export function Footer() {
               <h2 className="font-display text-sm font-bold uppercase tracking-[0.1em] text-white">
                 {col.heading}
               </h2>
-              <ul className="mt-4 space-y-3 text-[0.9375rem]">
+              <ul className="mt-3 space-y-1 text-[0.9375rem]">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="transition-colors hover:text-cyan">
+                    <Link
+                      href={link.href}
+                      className="inline-block py-1.5 transition-colors hover:text-cyan"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -95,10 +102,13 @@ export function Footer() {
               © {new Date().getFullYear()} {site.legal.entity}
               {site.legal.gstRegistered && " · GST registered"}
             </p>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <ul className="flex flex-wrap gap-x-6">
               {nav.legal.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="transition-colors hover:text-cyan">
+                  <Link
+                    href={link.href}
+                    className="inline-block py-1.5 transition-colors hover:text-cyan"
+                  >
                     {link.label}
                   </Link>
                 </li>

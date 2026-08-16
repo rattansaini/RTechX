@@ -1,0 +1,56 @@
+import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Section, SectionHeading } from "@/components/ui/section";
+import type { Faq } from "@/content/courses";
+
+export function FaqSection({
+  faqs,
+  title = "Questions people actually ask",
+  eyebrow = "FAQ",
+  moreHref,
+  id = "faq",
+}: {
+  faqs: readonly Faq[];
+  title?: string;
+  eyebrow?: string;
+  /** When set, renders a "full FAQ" link — used on the home page. */
+  moreHref?: string;
+  id?: string;
+}) {
+  if (faqs.length === 0) return null;
+
+  return (
+    <Section id={id}>
+      <SectionHeading eyebrow={eyebrow} title={title} />
+
+      <div className="mt-10 max-w-3xl">
+        <Accordion type="single" collapsible className="space-y-3">
+          {faqs.map((f, i) => (
+            <AccordionItem key={f.q} value={`faq-${i}`}>
+              <AccordionTrigger>{f.q}</AccordionTrigger>
+              <AccordionContent>{f.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+
+        {moreHref && (
+          <p className="mt-6 text-[0.9375rem] text-ink-400">
+            More questions are answered on the{" "}
+            <Link
+              href={moreHref}
+              className="font-semibold text-blue-700 underline underline-offset-4 hover:text-blue"
+            >
+              course page
+            </Link>
+            .
+          </p>
+        )}
+      </div>
+    </Section>
+  );
+}

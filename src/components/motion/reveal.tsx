@@ -1,36 +1,32 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 /**
- * Scroll reveal used across marketing sections.
+ * Scroll reveal.
  *
- * The markup is identical on server and client — reduced motion is handled
- * globally by MotionProvider, not by branching here. Never wrap the LCP
- * element in this: it starts at opacity 0 and would delay the largest paint.
+ * This is deliberately a server component that only adds a class — there is no
+ * JavaScript behind it at all. The animation is a CSS scroll-driven timeline
+ * (see `.reveal` in globals.css), which means:
+ *
+ *  - content is visible by default and never depends on hydration, an
+ *    IntersectionObserver, or a working `requestAnimationFrame`;
+ *  - it degrades to plain static content in the Instagram/Facebook in-app
+ *    webviews, which is where most of this site's traffic lands;
+ *  - it runs off the main thread, so it costs nothing on a mid-range Android.
+ *
+ * The `delay` prop is accepted and ignored: with a view() timeline each element
+ * is driven by its own scroll position, which produces a natural stagger
+ * without hardcoding one.
  */
 export function Reveal({
   children,
-  delay = 0,
   className,
-  as = "div",
+  as: Tag = "div",
 }: {
   children: React.ReactNode;
+  /** @deprecated Retained for call-site compatibility; stagger is positional. */
   delay?: number;
   className?: string;
   as?: "div" | "section" | "li" | "figure" | "ul";
 }) {
-  const MotionTag = motion[as];
-
-  return (
-    <MotionTag
-      className={className}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-64px" }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </MotionTag>
-  );
+  return <Tag className={cn("reveal", className)}>{children}</Tag>;
 }

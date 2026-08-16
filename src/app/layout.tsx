@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { MotionProvider } from "@/components/motion/motion-provider";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -61,13 +60,11 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <MotionProvider>
-          <Header />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </MotionProvider>
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
