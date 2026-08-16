@@ -4,6 +4,7 @@ import { EmailCaptureForm } from "@/components/marketing/lead-capture";
 import { BooleanBuilder } from "@/components/marketing/boolean-builder";
 import { FinalCtaBand } from "@/components/marketing/cta-band";
 import { Container } from "@/components/ui/container";
+import { isResourceReady } from "@/lib/resources";
 
 export const metadata: Metadata = {
   title: "Free Boolean cheat-sheet",
@@ -22,6 +23,9 @@ const inside = [
 ];
 
 export default function FreeResourcesPage() {
+  // Don't promise an instant download until the file actually exists.
+  const ready = isResourceReady("boolean-cheatsheet");
+
   return (
     <>
       <Container className="py-12 sm:py-16">
@@ -53,12 +57,18 @@ export default function FreeResourcesPage() {
                 Where should we send it?
               </h2>
               <p className="mt-1.5 text-[0.9375rem] text-ink-400">
-                One email with the PDF. No drip sequence, unsubscribe any time.
+                {ready
+                  ? "One email with the PDF. No drip sequence, unsubscribe any time."
+                  : "We're finishing it off — you'll get it the moment it's ready. No drip sequence, unsubscribe any time."}
               </p>
               <EmailCaptureForm
                 source="boolean-cheatsheet"
-                cta="Send the cheat-sheet"
-                successMessage="On its way — check your inbox in a minute."
+                cta={ready ? "Send the cheat-sheet" : "Email it to me when it's ready"}
+                successMessage={
+                  ready
+                    ? "On its way — check your inbox in a minute."
+                    : "You're on the list — we'll email it the moment it's ready."
+                }
                 className="mt-5"
               />
             </div>

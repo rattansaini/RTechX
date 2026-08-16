@@ -147,3 +147,73 @@ function escapeHtml(value: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+
+/**
+ * Delivers a lead magnet.
+ *
+ * If the resource has no URL configured yet, this sends an honest holding
+ * email rather than silently doing nothing — which is what the site did
+ * before, while the page promised "one email with the PDF".
+ */
+export async function sendResourceEmail(input: {
+  to: string;
+  resourceName: string;
+  resourceUrl: string | null;
+}) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("[email] RESEND_API_KEY unset — skipping resource email");
+    return { skipped: true as const };
+  }
+
+  const resend = new Resend(apiKey);
+  const from = process.env.RESEND_FROM_EMAIL ?? `RTechX <${site.supportEmail}>`;
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? site.url;
+  const ready = Boolean(input.resourceUrl);
+  const href = input.resourceUrl?.startsWith("http")
+    ? input.resourceUrl
+    : `${base}${input.resourceUrl ?? ""}`;
+
+  const inner = ready
+    ? `
+      <p style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:${MUTED};margin:0 0 10px">Your free download</p>
+      <h1 style="font-size:23px;line-height:1.25;margin:0 0 16px">${escapeHtml(input.resourceName)}</h1>
+      <p style="font-size:15px;line-height:1.65;color:${MUTED};margin:0 0 24px">
+        Here it is. Keep it open in a tab the next time you're building a search — the operators are the part people get wrong first.
+      </p>
+      <p style="margin:0 0 28px">
+        <a href="${href}" style="display:inline-block;background:${BLUE};color:#fff;font-size:15px;font-weight:600;text-decoration:none;padding:13px 24px;border-radius:12px">Download the PDF</a>
+      </p>
+      <p style="font-size:14px;line-height:1.65;color:${MUTED};margin:0">
+        If you want to watch this done live against real requirements, that's Day 2 of the
+        <a href="${base}/courses/it-recruitment-masterclass" style="color:${BLUE};font-weight:600">IT Recruitment Masterclass</a>.
+      </p>`
+    : `
+      <p style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:${MUTED};margin:0 0 10px">You're on the list</p>
+      <h1 style="font-size:23px;line-height:1.25;margin:0 0 16px">${escapeHtml(input.resourceName)} is on its way</h1>
+      <p style="font-size:15px;line-height:1.65;color:${MUTED};margin:0 0 24px">
+        We're finishing it off. You'll get it by email the moment it's ready — no follow-up sequence, just the file.
+      </p>
+      <p style="font-size:14px;line-height:1.65;color:${MUTED};margin:0">
+        In the meantime, the same skill is taught live on Day 2 of the
+        <a href="${base}/courses/it-recruitment-masterclass" style="color:${BLUE};font-weight:600">IT Recruitment Masterclass</a>.
+      </p>`;
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to: [input.to],
+    subject: ready
+      ? `${input.resourceName}`
+      : `${input.resourceName} — you're on the list`,
+    html: shell(inner),
+    text: ready
+      ? `${input.resourceName}\n\nDownload: ${href}\n\nThe same skill is taught live on Day 2 of the IT Recruitment Masterclass: ${base}/courses/it-recruitment-masterclass\n\n${site.disclaimer}`
+      : `${input.resourceName} is on its way.\n\nWe're finishing it off and you'll get it by email the moment it's ready.\n\n${base}/courses/it-recruitment-masterclass\n\n${site.disclaimer}`,
+  });
+
+  if (error) {
+    console.error("[email] resource email failed:", error);
+    return { skipped: false as const, error };
+  }
+  return { skipped: false as const, id: data?.id };
+}

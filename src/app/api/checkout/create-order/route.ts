@@ -91,19 +91,21 @@ export async function POST(req: Request) {
   // Capture the lead before payment is attempted, so an abandoned checkout
   // still leaves us someone to follow up with.
   const db = supabaseAdmin();
+  const leadRow: Record<string, unknown> = {
+    email: input.email.toLowerCase(),
+    name: input.name,
+    phone,
+    source: "checkout",
+    course_slug: course.slug,
+  };
+  // Omit rather than blank it, so an earlier campaign attribution survives.
+  if (input.attribution && Object.keys(input.attribution).length > 0) {
+    leadRow.attribution = input.attribution;
+  }
+
   await db
     .from("leads")
-    .upsert(
-      {
-        email: input.email.toLowerCase(),
-        name: input.name,
-        phone,
-        source: "checkout",
-        course_slug: course.slug,
-        attribution: input.attribution ?? {},
-      },
-      { onConflict: "email,source", ignoreDuplicates: false }
-    )
+    .upsert(leadRow, { onConflict: "email,source", ignoreDuplicates: false })
     .then(({ error }) => {
       if (error) console.error("[create-order] lead upsert failed (ignored):", error);
     });
