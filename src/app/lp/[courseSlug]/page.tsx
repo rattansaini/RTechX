@@ -255,7 +255,7 @@ export default async function LandingPage({
                 {instructor.name}
               </p>
               <p className="mt-0.5 text-[0.9375rem] text-ink-400">
-                {instructor.role} · {instructor.location}
+                {instructor.role}
               </p>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-400">
                 {instructor.stats.map((s) => `${s.value} ${s.label}`).join(" · ")}. He

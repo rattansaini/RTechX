@@ -31,7 +31,7 @@ export function InstructorTeaser() {
               {instructor.name}
             </h2>
             <p className="mt-2 text-[1.0625rem] text-ink-400">
-              {instructor.role} · {instructor.location}
+              {instructor.role}
             </p>
 
             <dl className="mt-8 grid grid-cols-3 gap-3">
