@@ -1,0 +1,26 @@
+# Keep the build context small and make sure no local secret can ever be
+# copied into an image layer.
+.env
+.env.*
+!.env.example
+
+node_modules
+.next
+out
+build
+
+.git
+.gitignore
+.vercel
+
+README.md
+*.md
+!README.md
+
+.DS_Store
+*.log
+npm-debug.log*
+
+.vscode
+.idea
+.claude

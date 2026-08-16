@@ -165,11 +165,39 @@ to behave.
 
 ## Deployment
 
-Vercel. Import the repo, add every environment variable from the table above,
-deploy.
+Self-hosted on a Hostinger VPS via **Coolify**, which builds from the committed
+`Dockerfile` and redeploys on every push to `main`.
 
-Set `NEXT_PUBLIC_SITE_URL` to the production domain or the sitemap, canonicals
-and OG images will point at the wrong host.
+### One-time setup
+
+1. **hPanel → VPS → OS & Panel → Change OS**, pick the **Coolify** template.
+   Takes about 10 minutes and wipes the server, so only do this on a VPS with
+   nothing you need on it.
+2. Open the Coolify URL hPanel gives you and create the admin account. Do this
+   promptly — until you do, the panel is unclaimed.
+3. **Sources → GitHub** → install the Coolify GitHub App, granting it access to
+   this repository only.
+4. **Projects → New → Application**, choose this repo, build pack **Dockerfile**.
+5. Add the environment variables (below), then deploy.
+6. **Domains** → set the domain and enable HTTPS. Coolify obtains the
+   Let's Encrypt certificate itself.
+
+### The build-time gotcha
+
+`NEXT_PUBLIC_*` values are **inlined into the browser bundle at build time**,
+not read when the container starts. In Coolify they must be marked as **build
+variables**, or the deployed site will have empty strings for the Razorpay key
+id, the Supabase URL and the pixel id — and checkout will fail with no obvious
+cause. The server-only secrets are read at runtime and don't need this.
+
+### Other hosts
+
+Any platform that runs a Docker image works unchanged. Vercel and Netlify also
+work and ignore both the Dockerfile and `output: "standalone"`. Shared hosting
+does not — Next.js needs a live Node process.
+
+Whatever you use, set `NEXT_PUBLIC_SITE_URL` to the production domain or the
+sitemap, canonical URLs and OG images will point at the wrong host.
 
 ---
 
