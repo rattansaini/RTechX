@@ -12,6 +12,15 @@
   NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
 
+  # Netlify scans the build output for environment-variable values and fails
+  # the deploy when it finds one. NEXT_PUBLIC_* values are *supposed* to appear
+  # there — Next inlines them into the browser bundle by design — so without
+  # this the first build fails with a "secrets detected" error that looks
+  # alarming and isn't. Only genuinely public keys are listed; the real secrets
+  # (Razorpay, Supabase service role, Resend) are deliberately absent and stay
+  # scanned.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_RAZORPAY_KEY_ID,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,NEXT_PUBLIC_GA4_MEASUREMENT_ID,NEXT_PUBLIC_META_PIXEL_ID,NEXT_PUBLIC_WHATSAPP_GROUP_URL,NEXT_PUBLIC_BOOLEAN_CHEATSHEET_URL"
+
 # Security headers are also set in next.config.ts, which covers server-rendered
 # responses. These cover static assets served straight from the CDN, which
 # never touch the Next.js server.
