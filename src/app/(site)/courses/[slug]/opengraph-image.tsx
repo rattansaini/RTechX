@@ -1,5 +1,10 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { courseSlugs, getCourse, nextBatch, tierById } from "@/content/courses";
+import { loadOgFonts, rupee } from "@/lib/og-font";
+
+export const runtime = "nodejs";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -13,9 +18,10 @@ export function generateStaticParams() {
  * Social card. Built from the content collection so the price and batch date
  * on a shared link can never drift from the page itself.
  *
- * Uses system fonts rather than fetching the brand faces — a remote font fetch
- * inside ImageResponse is a build-time network dependency, and a card that
- * fails to generate is worse than one set in a near-enough grotesk.
+ * Loads Inter rather than relying on the build container's system font, which
+ * has no rupee glyph and rendered the price as a tofu box. The load is
+ * best-effort: if it fails the card still generates, with a system font and an
+ * ASCII "Rs" instead of a broken character.
  */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -27,6 +33,18 @@ export default async function Image({ params }: { params: Promise<{ slug: string
 
   const core = tierById(course, "core");
   const batch = nextBatch(course);
+  const fonts = await loadOgFonts();
+  const hasFont = fonts.length > 0;
+
+  // Inlined as a data URI so the card doesn't depend on the site being
+  // reachable at the moment a scraper renders it.
+  let logo: string | null = null;
+  try {
+    const bytes = readFileSync(join(process.cwd(), "public/brand/rtechx-logo.png"));
+    logo = `data:image/png;base64,${bytes.toString("base64")}`;
+  } catch {
+    logo = null;
+  }
 
   return new ImageResponse(
     (
@@ -41,19 +59,23 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           backgroundImage:
             "radial-gradient(circle at 85% 12%, rgba(0,168,240,0.30), transparent 55%)",
           padding: 64,
-          fontFamily: "sans-serif",
+          fontFamily: hasFont ? "Inter" : "sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div
-            style={{
-              width: 34,
-              height: 34,
-              borderRadius: 999,
-              background: "linear-gradient(135deg,#0060F0,#00A8F0)",
-              display: "flex",
-            }}
-          />
+          {logo ? (
+            <img src={logo} alt="" width={44} height={35} />
+          ) : (
+            <div
+              style={{
+                width: 34,
+                height: 34,
+                borderRadius: 999,
+                background: "linear-gradient(135deg,#0060F0,#00A8F0)",
+                display: "flex",
+              }}
+            />
+          )}
           <div style={{ color: "#fff", fontSize: 30, fontWeight: 800, letterSpacing: -0.5 }}>
             RTechX
           </div>
@@ -104,7 +126,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 borderRadius: 999,
               }}
             >
-              From ₹{core.priceINR}
+              From {rupee(hasFont)}{core.priceINR}
             </div>
           )}
           {batch && (
@@ -129,6 +151,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         </div>
       </div>
     ),
-    size
+    { ...size, fonts: hasFont ? fonts : undefined }
   );
 }
