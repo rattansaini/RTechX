@@ -55,8 +55,24 @@ export async function sendEnrolmentEmail(input: {
     organiserEmail: site.supportEmail,
   });
 
+  // The dates are spelled out in the body as well as shipped in the .ics.
+  // Attachment rendering is the least reliable part of an email: Gmail on
+  // Android hides .ics behind a card, some clients strip unknown types, and a
+  // student who can't find the file has no idea when to turn up. Text always
+  // survives. The invite is the convenience; this is the record.
+  const sessionCount = input.tier.inheritsFrom ? input.course.days.length : 3;
+  const sessionDates = Array.from({ length: sessionCount }, (_, i) => {
+    // Stepped in UTC on purpose. Anchoring to +05:30 and reading the date back
+    // through toISOString lands on the previous calendar day, because midnight
+    // IST is 18:30 UTC the day before — which printed Day 1 as 31 August for a
+    // batch starting 1 September. The date here is a label, not an instant.
+    const d = new Date(`${input.batchStartDate}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + i);
+    return `Day ${i + 1} — ${formatBatchDate(d.toISOString().slice(0, 10))}`;
+  });
+
   const steps = [
-    `Save the calendar invite attached to this email — it has every session, with a 30-minute reminder.`,
+    `Save the calendar invite attached to this email (rtechx-batch.ics) — it has all ${sessionCount} sessions, each with a 30-minute reminder. If your email app doesn't show the attachment, the dates are below.`,
     whatsappGroup
       ? `<a href="${whatsappGroup}" style="color:${BLUE};font-weight:600">Join the batch WhatsApp group</a> — the joining link and your Resume Playbook go out there before Day 1, then the rest of your materials as each day finishes.`
       : `We'll WhatsApp you the joining link and your Resume Playbook before Day 1 on the number you gave us, then the rest of your materials as each day finishes.`,
@@ -85,6 +101,18 @@ export async function sendEnrolmentEmail(input: {
           <td style="padding:10px 0;text-align:right;font-family:ui-monospace,monospace;font-size:12px">${escapeHtml(input.orderId)}</td></tr>
     </table>
 
+    <h2 style="font-size:16px;margin:0 0 12px">Your sessions</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:0 0 28px">
+      ${sessionDates
+        .map(
+          (label, i) => `<tr>
+             <td style="padding:9px 0;${i < sessionDates.length - 1 ? `border-bottom:1px solid ${LINE};` : ""}color:${MUTED}">${escapeHtml(label)}</td>
+             <td style="padding:9px 0;${i < sessionDates.length - 1 ? `border-bottom:1px solid ${LINE};` : ""}text-align:right;font-weight:600">${escapeHtml(input.timeIST)}</td>
+           </tr>`
+        )
+        .join("")}
+    </table>
+
     <h2 style="font-size:16px;margin:0 0 12px">What happens next</h2>
     <ol style="font-size:15px;line-height:1.7;color:${MUTED};margin:0 0 24px;padding-left:20px">
       ${steps.map((s) => `<li style="margin-bottom:8px">${s}</li>`).join("")}
@@ -104,8 +132,10 @@ export async function sendEnrolmentEmail(input: {
     ``,
     `${input.course.title} — ${input.tier.name}`,
     `${input.tier.durationLabel}`,
-    `Starts ${formatBatchDate(input.batchStartDate)} at ${input.timeIST}`,
     `Paid ${formatINR(input.amountPaise / 100)} · Order ${input.orderId}`,
+    ``,
+    `Your sessions (all ${input.timeIST}):`,
+    ...sessionDates.map((d) => `  ${d}`),
     ``,
     `What happens next:`,
     `1. Save the attached calendar invite.`,
@@ -127,6 +157,10 @@ export async function sendEnrolmentEmail(input: {
       {
         filename: "rtechx-batch.ics",
         content: Buffer.from(ics, "utf8").toString("base64"),
+        // Stated rather than inferred from the extension. Without it the file
+        // can arrive as application/octet-stream, which mail clients treat as
+        // an unknown blob instead of offering "add to calendar".
+        contentType: "text/calendar; method=PUBLISH; charset=UTF-8",
       },
     ],
   });
