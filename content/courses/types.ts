@@ -38,6 +38,8 @@ export type Batch = {
   /** ISO date, Asia/Kolkata. Drives the countdown and every "next batch" label. */
   startDate: string;
   timeIST: string;
+  /** Where the live sessions happen, e.g. "Zoom or Google Meet". */
+  platform: string;
   seats: number;
   /**
    * Leave `null` to derive from confirmed enrolments in Supabase.
@@ -63,6 +65,25 @@ export type PainPoint = { emoji: string; line: string };
  * the stat tiles use.
  */
 export type Faq = { q: string; a: string; source?: string };
+
+/**
+ * An extra thrown in beyond the syllabus.
+ *
+ * `available` gates rendering: a bonus that isn't written yet stays in this
+ * file with `available: false` and does not appear on the page. Same rule the
+ * testimonials and proof slots follow — nothing is promised before it exists.
+ *
+ * There is deliberately no `valueINR` field. Assigning a rupee value to
+ * something that was never sold separately is a false discount claim, and the
+ * "Total bonus value ₹X" pattern is exactly what this brand does not do.
+ */
+export type Bonus = {
+  id: string;
+  title: string;
+  body: string;
+  points: string[];
+  available: boolean;
+};
 
 /** A single line in the "what you get" stack. No rupee valuations — see README. */
 export type Inclusion = { title: string; detail: string };
@@ -147,6 +168,7 @@ export type Course = {
   /** Market comparison shown near pricing. Must be defensible. */
   marketAnchorNote?: string;
   careerScope?: CareerScope;
+  bonuses?: Bonus[];
   seo: {
     title: string;
     description: string;

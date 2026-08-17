@@ -168,6 +168,45 @@ export const itRecruitmentMasterclass: Course = {
     },
   ],
 
+  // Only `available: true` bonuses render. Flip the playbook when the document
+  // exists — nothing else needs changing.
+  bonuses: [
+    {
+      id: "field-kit",
+      title: "The Boolean & Intake Field Kit",
+      body: "A 20-page working document, yours after Day 1. Not a summary of the session — the strings and templates themselves, ready to run.",
+      points: [
+        "35 ready-to-run search strings across every major IT role family",
+        "The operator rules that differ platform to platform",
+        "The intake, screening and submission templates used in the sessions",
+      ],
+      available: true,
+    },
+    {
+      id: "resume-playbook",
+      title: "Resume Building Playbook",
+      body: "How recruiters actually read a resume, and how to structure one so it survives the first screen.",
+      points: [
+        "What a recruiter scans for in the first few seconds",
+        "Role-wise structures that hold up in an ATS",
+        "Bullet formulas that describe evidence rather than duties",
+      ],
+      // Not written yet. Stays hidden until Rattan supplies the PDF.
+      available: false,
+    },
+    {
+      id: "bring-a-friend",
+      title: "1+1 — bring a friend",
+      body: "One paid seat admits two people. Reply to your confirmation email with your friend's name and email, and we'll add them to the batch.",
+      points: [
+        "Your friend attends every live day with you",
+        "They get the recordings and the materials too",
+        "Easier to practise sourcing when someone else is doing it alongside you",
+      ],
+      available: true,
+    },
+  ],
+
   inclusions: [
     { title: "60+ page handbook", detail: "The full course in PDF — yours to keep." },
     { title: "Boolean library", detail: "10 ready role-family search strings you can run the same evening." },
@@ -193,6 +232,7 @@ export const itRecruitmentMasterclass: Course = {
     {
       startDate: "2026-09-01",
       timeIST: "8:00–10:00 PM IST",
+      platform: "Zoom or Google Meet",
       seats: 20,
       // null = derive from confirmed enrolments once checkout is live.
       seatsLeft: null,

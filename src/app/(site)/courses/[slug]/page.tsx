@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Bonuses } from "@/components/course/bonuses";
 import { CareerScope } from "@/components/course/career-scope";
 import { CourseHero } from "@/components/course/hero";
 import { PriceHonesty } from "@/components/course/price-honesty";
+import { WorkshopDetails } from "@/components/course/workshop-details";
 import {
   Audience,
   CertificatePreview,
@@ -73,17 +75,23 @@ export default async function CoursePage({
       {/* 1 */}
       <CourseHero course={course} />
 
-      {/* 2 — hides itself entirely when there's no upcoming batch */}
+      {/* 2 — hides itself entirely when there's no upcoming batch.
+          showCountdown is false because the countdown now lives only in the
+          sticky bar: two timers on one page compete with each other and read
+          as pressure rather than information. This bar keeps the date and the
+          seat count. */}
       {batch && (
         <UrgencyBar
           startDate={batch.startDate}
           timeIST={batch.timeIST}
           seats={batch.seats}
           seatsLeft={batch.seatsLeft}
-          showCountdown={course.urgency.countdownTo === "batch-start"}
+          showCountdown={false}
           showSeatsLeft={course.urgency.showSeatsLeft}
         />
       )}
+
+      <WorkshopDetails course={course} />
 
       <StatBand />
 
@@ -100,6 +108,8 @@ export default async function CoursePage({
       <UpgradeBlock course={course} />
 
       <CareerScope course={course} />
+
+      <Bonuses course={course} />
 
       <PriceHonesty />
 
@@ -127,7 +137,13 @@ export default async function CoursePage({
       <FinalCtaBand />
 
       {/* 14 */}
-      {core && <StickyCta courseSlug={course.slug} priceINR={core.priceINR} />}
+      {core && (
+        <StickyCta
+          courseSlug={course.slug}
+          priceINR={core.priceINR}
+          startDate={batch?.startDate}
+        />
+      )}
     </>
   );
 }
