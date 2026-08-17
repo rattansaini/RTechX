@@ -143,10 +143,50 @@ export function CheckoutForm({
     }
   }
 
+  /**
+   * Mirrors the server's zod schema closely enough to catch the common cases
+   * before a round trip. The server remains the authority — this never relaxes
+   * a rule, it only reports the same rejection sooner and against a named field.
+   *
+   * The form carries `noValidate`, so nothing else was telling someone which
+   * box was wrong: an incomplete form produced one generic "check the details
+   * you entered" after a network call, with no focus moved and no field marked.
+   */
+  function firstInvalidField():
+    | { id: string; message: string }
+    | null {
+    const name = form.name.trim();
+    if (name.length < 2) {
+      return { id: `${uid}-name`, message: "Please enter your full name." };
+    }
+    // Deliberately permissive, matching the server: one @, a dot after it, no
+    // spaces. Anything stricter rejects real addresses.
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      return { id: `${uid}-email`, message: "Please enter a valid email address." };
+    }
+    const digits = form.phone.replace(/[^\d]/g, "");
+    if (digits.length < 8) {
+      return {
+        id: `${uid}-phone`,
+        message: "Please enter a WhatsApp number we can reach you on.",
+      };
+    }
+    return null;
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (submitting) return;
     setError(null);
+
+    const invalid = firstInvalidField();
+    if (invalid) {
+      setError(invalid.message);
+      const el = document.getElementById(invalid.id);
+      el?.focus();
+      el?.scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
 
     if (!paymentsEnabled) {
       setError(`Payments aren't switched on yet. Email ${supportEmail} and we'll book you in.`);

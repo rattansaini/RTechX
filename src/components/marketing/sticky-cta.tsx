@@ -100,7 +100,11 @@ export function StickyCta({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm transition-transform duration-200",
+        // `bottom-[var(--consent-height,0px)]` keeps this bar clear of the cookie
+        // banner, which is also fixed to the bottom and sits above it. Without it
+        // the banner covers the purchase button for every first-time visitor —
+        // invisible today only because no analytics ID is configured yet.
+        "fixed inset-x-0 bottom-[var(--consent-height,0px)] z-40 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm transition-transform duration-200",
         visible ? "translate-y-0" : "translate-y-full"
       )}
       aria-hidden={!visible}

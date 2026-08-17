@@ -138,7 +138,10 @@ export const itRecruitmentMasterclass: Course = {
       // a strikethrough would be a false discount claim.
       durationLabel: "3 days · 2 hrs/day · Live",
       includes: [
-        "Days 1–3, live on Zoom",
+        // Kept in step with `batches[].platform`. Naming Zoom specifically here
+        // while the workshop grid said "Zoom or Google Meet" meant two answers
+        // to the same question on one page.
+        "Days 1–3, live online",
         "Session recordings",
         "60+ page handbook (PDF)",
         "Intake templates and Boolean library",
@@ -189,7 +192,7 @@ export const itRecruitmentMasterclass: Course = {
       body: "A 16-page guide sent with your joining details, before Day 1. Written by a working TA lead, so it debunks as much as it teaches — including the 75% ATS auto-rejection figure everybody repeats and nobody sources.",
       points: [
         "Three complete worked recruiter resumes — including one for people with no recruiting experience yet",
-        "What eleven role families must prove, and the tell when a resume doesn't",
+        "What eleven role families must prove, and the tell when a resume doesn’t",
         "Bullet formulas for impact, plus what to write when you genuinely have no numbers",
         "A twenty-point check to run before you send, and a fifteen-minute tailoring routine",
       ],
@@ -198,7 +201,7 @@ export const itRecruitmentMasterclass: Course = {
     {
       id: "bring-a-friend",
       title: "1+1 — bring a friend",
-      body: "One paid seat admits two people. Reply to your confirmation email with your friend's name and email, and we'll add them to the batch.",
+      body: "One paid seat admits two people. Reply to your confirmation email with your friend’s name and email, and we’ll add them to the batch.",
       points: [
         "Your friend attends every live day with you",
         "They get the recordings and the materials too",
@@ -264,8 +267,8 @@ export const itRecruitmentMasterclass: Course = {
   careerScope: {
     intro: [
       "IT recruitment is one of the few technology-adjacent careers you can enter without a technical degree, from any graduate background, and be earning within months rather than years.",
-      "The market is real, and it is specific. India's IT staffing segment grew 16.1% year-on-year while general staffing grew 4%. Global Capability Centres — now around 2,120 of them across Bengaluru, Hyderabad, Pune, Chennai and NCR — are on track to hire over five lakh people in 2026.",
-      "Read that contrast carefully, because it's the honest picture: the broad job market is soft. Specialised technical hiring is the part that is still growing. Generalists are having a hard year. That is precisely the argument for specialising.",
+      "The market is real, and it is specific. India’s IT staffing segment grew 16.1% year-on-year while general staffing grew 4%. Global Capability Centres — now around 2,120 of them across Bengaluru, Hyderabad, Pune, Chennai and NCR — are on track to hire over five lakh people in 2026.",
+      "Read that contrast carefully, because it’s the honest picture: the broad job market is soft. Specialised technical hiring is the part that is still growing. Generalists are having a hard year. That is precisely the argument for specialising.",
     ],
     introSource:
       "Indian Staffing Federation, Flexi Staffing Employment Trends, Q3 FY2025-26 · foundit Insights Tracker, July 2026",
@@ -306,7 +309,7 @@ export const itRecruitmentMasterclass: Course = {
   faqs: [
     {
       q: "Is it live or recorded?",
-      a: "Live. Every session is taught in real time on Zoom, and the recording is shared after each day so you can go back over anything.",
+      a: "Live. Every session is taught in real time, and the recording is shared after each day so you can go back over anything. The joining link goes out before Day 1.",
     },
     {
       q: "What if I miss a day?",
@@ -346,18 +349,18 @@ export const itRecruitmentMasterclass: Course = {
     },
     {
       q: "Will this course get me a job?",
-      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India's IT staffing segment grew 16.1% year-on-year, and GCCs are projected to hire over five lakh people in 2026. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
+      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India’s IT staffing segment grew 16.1% year-on-year, and GCCs are projected to hire over five lakh people in 2026. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
       source:
         "Indian Staffing Federation, Flexi Staffing Employment Trends, Q3 FY2025-26 · foundit Insights Tracker, July 2026",
     },
     {
       q: "Is IT recruitment a safe career with AI coming?",
-      a: "Safer than most, and for a specific reason: recruitment is one of the few functions where human review isn't just preferred, it's regulated. The EU AI Act classifies recruitment tools as high-risk and requires human oversight; New York City requires bias audits and candidate notice for automated hiring tools. Someone qualified has to review what the machine produces.\n\nThe realistic version is this: AI has absorbed the admin — screening, scheduling, ranking, first-draft outreach. What it can't do is judge whether a candidate's “5 years of Kubernetes” is real, decide when a hiring manager's requirement is unreasonable, or persuade a senior engineer to take the call. Those are the skills that now separate a recruiter who gets hired from one who doesn't, and they're what these five days are about.",
+      a: "Safer than most, and for a specific reason: recruitment is one of the few functions where human review isn’t just preferred, it’s regulated. The EU AI Act classifies recruitment tools as high-risk and requires human oversight; New York City requires bias audits and candidate notice for automated hiring tools. Someone qualified has to review what the machine produces.\n\nThe realistic version is this: AI has absorbed the admin — screening, scheduling, ranking, first-draft outreach. What it can’t do is judge whether a candidate’s “5 years of Kubernetes” is real, decide when a hiring manager’s requirement is unreasonable, or persuade a senior engineer to take the call. Those are the skills that now separate a recruiter who gets hired from one who doesn’t, and they’re what this course is about.",
       source: "EU AI Act, Annex III · New York City Local Law 144",
     },
     {
-      q: "I'm from a non-technical background. Is that a problem?",
-      a: "No — and it's the most common background among people who do this well. You are not learning to code. You are learning to recognise what a technology does, which skills genuinely belong together, and what evidence in a resume proves someone actually did the work. Day 1 starts from zero and assumes no prior technical knowledge.",
+      q: "I’m from a non-technical background. Is that a problem?",
+      a: "No — and it’s the most common background among people who do this well. You are not learning to code. You are learning to recognise what a technology does, which skills genuinely belong together, and what evidence in a resume proves someone actually did the work. Day 1 starts from zero and assumes no prior technical knowledge.",
     },
   ],
 

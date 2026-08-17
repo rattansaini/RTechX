@@ -71,7 +71,13 @@ export default function PrivacyPage() {
           <strong>Resend</strong> &mdash; sends your confirmation and joining emails.
         </li>
         <li>
-          <strong>Vercel</strong> &mdash; hosts the website.
+          <strong>n8n</strong> &mdash; our internal workflow tool. When you submit a
+          form or enrol, your name, email and phone number are passed to it so we
+          can follow up. It is not used for advertising and your details are not
+          sold or shared onward.
+        </li>
+        <li>
+          <strong>Netlify</strong> &mdash; hosts the website.
         </li>
         <li>
           <strong>Google Analytics and Meta</strong> &mdash; only if you consent to

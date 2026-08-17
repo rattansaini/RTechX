@@ -25,7 +25,7 @@ export const stats: Stat[] = [
     id: "it-staffing-growth",
     value: "16.1%",
     label:
-      "Year-on-year growth in India's IT staffing segment — against 4% for general staffing",
+      "Year-on-year growth in India’s IT staffing segment — against 4% for general staffing",
     source: "Indian Staffing Federation, Flexi Staffing Employment Trends",
     asOf: "Q3 FY2025-26",
   },
@@ -33,7 +33,7 @@ export const stats: Stat[] = [
     id: "gcc-jobs",
     value: "5.1 lakh",
     label:
-      "Jobs projected from India's Global Capability Centres in 2026, across ~2,120 centres",
+      "Jobs projected from India’s Global Capability Centres in 2026, across ~2,120 centres",
     source: "foundit Insights Tracker",
     asOf: "July 2026",
   },

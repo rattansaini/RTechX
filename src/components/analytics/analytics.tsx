@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { readConsent, writeConsent, type ConsentState } from "@/lib/analytics";
 
@@ -70,6 +70,29 @@ export function Analytics() {
 }
 
 function ConsentBanner({ onDecide }: { onDecide: (s: ConsentState) => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Publish this banner's height so the sticky purchase bar can sit above it
+  // instead of underneath it. Both are fixed to the bottom of the viewport, and
+  // this one is on top — so without this the banner hides the buy button on the
+  // course page for every visitor who hasn't chosen yet.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const apply = () =>
+      document.documentElement.style.setProperty(
+        "--consent-height",
+        `${el.offsetHeight}px`
+      );
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      document.documentElement.style.removeProperty("--consent-height");
+    };
+  }, []);
+
   function decide(state: "granted" | "denied") {
     writeConsent(state);
     onDecide(state);
@@ -77,6 +100,7 @@ function ConsentBanner({ onDecide }: { onDecide: (s: ConsentState) => void }) {
 
   return (
     <div
+      ref={ref}
       role="dialog"
       aria-label="Cookie choices"
       className="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_32px_-16px_rgba(10,31,68,0.25)]"

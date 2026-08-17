@@ -21,7 +21,8 @@ const columns = [
     links: [
       { href: "/about", label: "About Rattan" },
       { href: "/contact", label: "Contact" },
-      { href: "/blog", label: "Blog" },
+      // No Blog link until a /blog route exists. It pointed at a 404 from
+      // every page on the site, footer links being sitewide.
     ],
   },
 ];
