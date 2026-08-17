@@ -163,6 +163,34 @@ to behave.
 
 ---
 
+## Course materials
+
+Three PDFs, three different audiences. **Only one of them lives in this repo.**
+
+| File | Who gets it | Where it lives |
+|---|---|---|
+| Free Boolean Cheat Sheet (4pp) | anyone who submits the form | `public/resources/` — public by design |
+| Boolean & Intake Field Kit (20pp) | paying students, after Day 1 | **not in this repo** |
+| IT Recruitment Student Handbook (63pp) | paying students who attend, after Day 3 | **not in this repo** |
+
+Anything under `public/` is served to anyone who knows the URL, with no
+authentication of any kind. Putting the Field Kit or the Handbook there would
+hand the paid product away for free and the link would spread — students share
+them in WhatsApp groups. Do not add them, even temporarily.
+
+Delivery for the two paid PDFs is **manual** as of the September 2026 batch:
+Rattan sends the Field Kit after Day 1 and the Handbook after Day 3, over
+WhatsApp or email. The site's confirmation email and `/thank-you` page describe
+exactly this sequence — if the process changes, those two need changing with it
+or the site is promising something that does not happen.
+
+If this needs automating later, the options considered were: a triggered email
+that attaches the PDF and checks for a confirmed enrolment first, or a gated
+download page keyed to the email used at checkout. Both need the files stored
+somewhere private (Supabase Storage with signed URLs), never `public/`.
+
+---
+
 ## Deployment
 
 **Netlify** — its free tier permits commercial use, and it runs a real Node
