@@ -163,6 +163,64 @@ to behave.
 
 ---
 
+## Campaign URLs
+
+Paste-ready links for Instagram. The `/lp/` page has no nav and no exit links
+by design; `/free-resources` is the lower-friction entry for cold traffic.
+
+Attribution is captured for `utm_source`, `utm_medium`, `utm_campaign`,
+`utm_content`, `utm_term`, `ad_id`, `campaign_id`, `adgroup_id`, `fbclid` and
+`gclid`, stored on the lead and the order, and forwarded to n8n. It survives
+the whole session, so a visitor who lands on an ad and buys twenty minutes
+later is still attributed to that ad.
+
+**Instagram bio** — one permanent link. Point it at the cheat-sheet for cold
+traffic; an email is a much easier yes than 499 rupees from someone who has
+never heard of RTechX.
+
+    https://www.rtechx.com/free-resources?utm_source=instagram&utm_medium=bio&utm_campaign=cheatsheet
+
+**Story link sticker**
+
+    https://www.rtechx.com/lp/it-recruitment-masterclass?utm_source=instagram&utm_medium=story&utm_campaign=sept-2026
+
+**Reels and posts** — vary `utm_medium` per format so the report can separate
+them.
+
+    https://www.rtechx.com/lp/it-recruitment-masterclass?utm_source=instagram&utm_medium=reel&utm_campaign=sept-2026
+
+**Paid Meta ads** — goes in the ad's Website URL field. The `{{...}}` are Meta
+macros filled per ad, so this one URL covers every ad without editing.
+
+    https://www.rtechx.com/lp/it-recruitment-masterclass?utm_source=instagram&utm_medium={{placement}}&utm_campaign={{campaign.name}}&utm_content={{adset.name}}&utm_term={{ad.name}}&ad_id={{ad.id}}&campaign_id={{campaign.id}}&adgroup_id={{adset.id}}
+
+Change `utm_campaign` per batch (`sept-2026`, `oct-2026`) so batches stay
+comparable. Keep `utm_source` and `utm_medium` spelled consistently — `reel`
+and `Reel` are two different rows in any report.
+
+### Reading the results
+
+    -- where leads came from
+    select attribution->>'utm_source' as source,
+           attribution->>'utm_medium' as medium,
+           attribution->>'utm_campaign' as campaign,
+           count(*)
+    from rtechx.leads group by 1,2,3 order by 4 desc;
+
+    -- where paid enrolments came from, and what they were worth
+    select o.attribution->>'utm_medium' as medium,
+           o.attribution->>'utm_campaign' as campaign,
+           count(*) as sales,
+           sum(o.amount_paise)/100 as rupees
+    from rtechx.orders o
+    where o.status = 'paid'
+    group by 1,2 order by 4 desc;
+
+The second query is the one that matters: leads are cheap, and only the sales
+figure tells you which campaign actually paid for itself.
+
+---
+
 ## Course materials
 
 Three PDFs, three different audiences. **Only one of them lives in this repo.**
