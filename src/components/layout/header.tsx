@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
@@ -10,10 +11,26 @@ import { flagshipCourse, tierById } from "@/content/courses";
 import { nav } from "@/lib/site";
 import { cn, formatINR } from "@/lib/utils";
 
-const joinHref = `/courses/${flagshipCourse.slug}`;
+const coursePath = `/courses/${flagshipCourse.slug}`;
+const checkoutPath = `/checkout/${flagshipCourse.slug}?tier=core`;
 const corePrice = formatINR(tierById(flagshipCourse, "core")?.priceINR ?? 0);
 
+/**
+ * Where "Join for ₹499" should go depends on where the reader already is.
+ *
+ * Elsewhere on the site it means "show me this course" — dropping a stranger
+ * into a payment form before they have read anything converts worse and reads
+ * as pushy. But on the course page itself that same href pointed at the page
+ * already open, so the button did nothing at all: a dead click on the single
+ * most important control on the site. There it has to mean "take my money".
+ */
+function joinHrefFor(pathname: string | null) {
+  return pathname === coursePath ? checkoutPath : coursePath;
+}
+
 export function Header() {
+  const pathname = usePathname();
+  const joinHref = joinHrefFor(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
