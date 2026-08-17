@@ -140,7 +140,7 @@ export const itRecruitmentMasterclass: Course = {
       includes: [
         "Days 1–3, live on Zoom",
         "Session recordings",
-        "40+ page handbook (PDF)",
+        "60+ page handbook (PDF)",
         "Intake templates and Boolean library",
         "100-point screening scorecard",
         "65-question interview prep bank",
@@ -169,7 +169,7 @@ export const itRecruitmentMasterclass: Course = {
   ],
 
   inclusions: [
-    { title: "40+ page handbook", detail: "The full course in PDF — yours to keep." },
+    { title: "60+ page handbook", detail: "The full course in PDF — yours to keep." },
     { title: "Boolean library", detail: "10 ready role-family search strings you can run the same evening." },
     { title: "Intake templates", detail: "The requirement intake sheet and must-have matrix used on Day 1." },
     { title: "Screening scorecards", detail: "The 100-point evidence-based resume scorecard from Day 2." },
@@ -181,7 +181,7 @@ export const itRecruitmentMasterclass: Course = {
   ],
 
   resources: [
-    "40+ page handbook (PDF)",
+    "60+ page handbook (PDF)",
     "Requirement intake templates",
     "Boolean search library",
     "100-point screening scorecards",

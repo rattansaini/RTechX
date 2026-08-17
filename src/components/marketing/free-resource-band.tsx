@@ -17,10 +17,10 @@ export function FreeResourceBand() {
               Free
             </span>
             <h2 className="mt-4 text-[1.75rem] font-extrabold leading-[1.15] text-white sm:text-3xl">
-              Get the 1-page Boolean cheat-sheet
+              Get the Boolean cheat-sheet
             </h2>
             <p className="mt-3 max-w-xl text-[1.0625rem] leading-relaxed text-ink-300">
-              The operators, the syntax, and five role-family strings you can paste
+              The six operators, the syntax, and ten role-family strings you can paste
               {ready
                 ? " into LinkedIn tonight. No course required."
                 : " into LinkedIn. We're finishing it — leave your email and it lands the moment it's ready."}

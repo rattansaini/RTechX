@@ -9,7 +9,7 @@ import { isResourceReady } from "@/lib/resources";
 export const metadata: Metadata = {
   title: "Free Boolean cheat-sheet",
   description:
-    "A one-page Boolean search cheat-sheet for recruiters: the operators, the syntax, and five role-family strings you can paste into LinkedIn tonight. Free, no course required.",
+    "A four-page Boolean search cheat-sheet for recruiters: the six operators, a six-step method, and ten role-family strings you can paste into LinkedIn tonight. Free, no course required.",
   alternates: { canonical: "/free-resources" },
   keywords: ["Boolean search training for recruiters", "boolean cheat sheet recruiters"],
 };
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const inside = [
   "Every operator that actually matters — AND, OR, NOT, quotes, parentheses — and when each one breaks",
   "The order of operations, which is where most strings silently go wrong",
-  "Five ready strings: Java backend, frontend React, data engineer, DevOps/cloud, QA automation",
+  "Ten ready strings, including Java backend, frontend React, data engineer, DevOps/cloud and QA automation",
   "How to widen a search that returns nobody, and tighten one that returns everybody",
   "The three mistakes that make LinkedIn quietly ignore half your query",
 ];
@@ -35,7 +35,7 @@ export default function FreeResourcesPage() {
               Free · no course required
             </p>
             <h1 className="mt-3 text-[2rem] font-extrabold leading-[1.12] sm:text-[2.75rem]">
-              The 1-page Boolean cheat-sheet
+              The Boolean cheat-sheet
             </h1>
             <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ink-400 sm:text-lg">
               Most recruiters type the job title into LinkedIn and hope. This is the

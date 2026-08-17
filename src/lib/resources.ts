@@ -27,8 +27,15 @@ export const resources: Record<ResourceKey, Resource> = {
   "boolean-cheatsheet": {
     key: "boolean-cheatsheet",
     source: "boolean-cheatsheet",
-    name: "The 1-page Boolean cheat-sheet",
-    url: process.env.NEXT_PUBLIC_BOOLEAN_CHEATSHEET_URL || null,
+    name: "The Boolean cheat-sheet",
+    // The PDF is committed at this path, so the default is the file itself
+    // rather than null. The env var stays as an override for the day this
+    // moves to a CDN — but the site no longer depends on someone remembering
+    // to set a variable in the Netlify dashboard before the promise on
+    // /free-resources becomes true.
+    url:
+      process.env.NEXT_PUBLIC_BOOLEAN_CHEATSHEET_URL ||
+      "/resources/rtechx-boolean-cheat-sheet.pdf",
   },
 };
 

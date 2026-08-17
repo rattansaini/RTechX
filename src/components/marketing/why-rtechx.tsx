@@ -12,7 +12,7 @@ const reasons = [
   {
     icon: FileStack,
     title: "You leave with artifacts, not notes",
-    body: "A 40+ page handbook, requirement intake sheets, a Boolean library, screening scorecards and a submission template. Things you can open on day one of a job.",
+    body: "A 60+ page handbook, requirement intake sheets, a Boolean library, screening scorecards and a submission template. Things you can open on day one of a job.",
   },
   {
     icon: Globe2,
