@@ -58,8 +58,8 @@ export async function sendEnrolmentEmail(input: {
   const steps = [
     `Save the calendar invite attached to this email — it has every session, with a 30-minute reminder.`,
     whatsappGroup
-      ? `<a href="${whatsappGroup}" style="color:${BLUE};font-weight:600">Join the batch WhatsApp group</a> — the joining link goes out there first, then your materials as each day finishes.`
-      : `We'll WhatsApp you the joining link before Day 1 on the number you gave us, then your materials as each day finishes.`,
+      ? `<a href="${whatsappGroup}" style="color:${BLUE};font-weight:600">Join the batch WhatsApp group</a> — the joining link and your Resume Playbook go out there before Day 1, then the rest of your materials as each day finishes.`
+      : `We'll WhatsApp you the joining link and your Resume Playbook before Day 1 on the number you gave us, then the rest of your materials as each day finishes.`,
     `Turn up on ${formatBatchDate(input.batchStartDate)} at ${input.timeIST} with a laptop. No paid tools needed.`,
   ];
 
@@ -109,7 +109,7 @@ export async function sendEnrolmentEmail(input: {
     ``,
     `What happens next:`,
     `1. Save the attached calendar invite.`,
-    whatsappGroup ? `2. Join the WhatsApp group: ${whatsappGroup}` : `2. We'll WhatsApp you the joining link before Day 1.`,
+    whatsappGroup ? `2. Join the WhatsApp group: ${whatsappGroup}` : `2. We'll WhatsApp you the joining link and your Resume Playbook before Day 1.`,
     `3. Turn up with a laptop. No paid tools needed.`,
     ``,
     input.course.guarantee ? `${input.course.guarantee.label} ${input.course.guarantee.body}` : ``,

@@ -168,8 +168,9 @@ export const itRecruitmentMasterclass: Course = {
     },
   ],
 
-  // Only `available: true` bonuses render. Flip the playbook when the document
-  // exists — nothing else needs changing.
+  // Only `available: true` bonuses render — flipping the flag is the whole
+  // mechanism, nothing else needs changing. All three describe documents or
+  // arrangements that exist; none of them carry a made-up rupee valuation.
   bonuses: [
     {
       id: "field-kit",
@@ -184,15 +185,15 @@ export const itRecruitmentMasterclass: Course = {
     },
     {
       id: "resume-playbook",
-      title: "Resume Building Playbook",
-      body: "How recruiters actually read a resume, and how to structure one so it survives the first screen.",
+      title: "The Resume Playbook",
+      body: "A 16-page guide sent with your joining details, before Day 1. Written by a working TA lead, so it debunks as much as it teaches — including the 75% ATS auto-rejection figure everybody repeats and nobody sources.",
       points: [
-        "What a recruiter scans for in the first few seconds",
-        "Role-wise structures that hold up in an ATS",
-        "Bullet formulas that describe evidence rather than duties",
+        "Three complete worked recruiter resumes — including one for people with no recruiting experience yet",
+        "What eleven role families must prove, and the tell when a resume doesn't",
+        "Bullet formulas for impact, plus what to write when you genuinely have no numbers",
+        "A twenty-point check to run before you send, and a fifteen-minute tailoring routine",
       ],
-      // Not written yet. Stays hidden until Rattan supplies the PDF.
-      available: false,
+      available: true,
     },
     {
       id: "bring-a-friend",

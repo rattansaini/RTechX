@@ -223,24 +223,29 @@ figure tells you which campaign actually paid for itself.
 
 ## Course materials
 
-Three PDFs, three different audiences. **Only one of them lives in this repo.**
+Four PDFs, different audiences. **Only one of them lives in this repo.**
 
 | File | Who gets it | Where it lives |
 |---|---|---|
 | Free Boolean Cheat Sheet (4pp) | anyone who submits the form | `public/resources/` — public by design |
+| The Resume Playbook (16pp) | paying students, with their joining details before Day 1 | **not in this repo** |
 | Boolean & Intake Field Kit (20pp) | paying students, after Day 1 | **not in this repo** |
 | IT Recruitment Student Handbook (63pp) | paying students who attend, after Day 3 | **not in this repo** |
 
 Anything under `public/` is served to anyone who knows the URL, with no
-authentication of any kind. Putting the Field Kit or the Handbook there would
-hand the paid product away for free and the link would spread — students share
-them in WhatsApp groups. Do not add them, even temporarily.
+authentication of any kind. Putting the Playbook, the Field Kit or the Handbook
+there would hand the paid product away for free and the link would spread —
+students share them in WhatsApp groups. Do not add them, even temporarily.
 
-Delivery for the two paid PDFs is **manual** as of the September 2026 batch:
-Rattan sends the Field Kit after Day 1 and the Handbook after Day 3, over
-WhatsApp or email. The site's confirmation email and `/thank-you` page describe
-exactly this sequence — if the process changes, those two need changing with it
-or the site is promising something that does not happen.
+Delivery for the three paid PDFs is **manual** as of the September 2026 batch,
+over WhatsApp or email: Rattan sends the Resume Playbook with the joining
+details before Day 1, the Field Kit after Day 1 and the Handbook after Day 3.
+The site's confirmation email, `/thank-you` page and the Bonuses section on the
+course page all describe exactly this sequence — if the process changes, those
+need changing with it or the site is promising something that does not happen.
+
+Note the 1+1 bonus doubles the send list: 20 paid seats can mean up to 40
+people expecting all three files.
 
 If this needs automating later, the options considered were: a triggered email
 that attaches the PDF and checks for a confirmed enrolment first, or a gated
