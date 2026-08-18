@@ -32,22 +32,6 @@
     X-Frame-Options = "SAMEORIGIN"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
 
-    # REPORT-ONLY on purpose. This policy is deliberately not enforced yet.
-    #
-    # The one page that matters most here is checkout, and Razorpay's payment
-    # window is a third-party script that injects its own styles and opens its
-    # own frames — plus bank pages it redirects to, which change without notice.
-    # A policy that is one directive too tight does not degrade gracefully: the
-    # pay button stops working and the shop is shut until someone notices.
-    #
-    # Report-only gives the same visibility with none of that risk: violations
-    # appear in the browser console and nothing is ever blocked.
-    #
-    # To promote it to enforcing, once a real payment has been completed with the
-    # console open and no violations were logged: rename this key to
-    # `Content-Security-Policy` and redeploy. Re-check after any change to
-    # analytics or embedded third parties.
-    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.razorpay.com https://www.google-analytics.com https://www.facebook.com; font-src 'self' data:; connect-src 'self' https://*.razorpay.com https://lumberjack.razorpay.com https://www.google-analytics.com https://connect.facebook.net; frame-src https://*.razorpay.com https://api.razorpay.com; upgrade-insecure-requests"
 
 # Immutable build assets — safe to cache forever because the filenames are
 # content-hashed.
