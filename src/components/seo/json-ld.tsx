@@ -38,12 +38,10 @@ export function OrganizationJsonLd() {
         description: site.tagline,
         email: site.supportEmail,
         telephone: `+${site.whatsapp.e164}`,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Gurugram",
-          addressRegion: "Haryana",
-          addressCountry: "IN",
-        },
+        address: { "@type": "PostalAddress", ...site.legal.postalAddress },
+        // Gurugram is the market and the place sessions are taught from, not the
+        // registered address. `areaServed` is the honest way to say that.
+        areaServed: "IN",
         founder: {
           "@type": "Person",
           name: instructor.name,

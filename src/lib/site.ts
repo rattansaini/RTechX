@@ -29,6 +29,22 @@ export const site = {
     entity: "Vedaant Enterprises",
     /** Shown on the terms, privacy, refund and contact pages. Razorpay checks for it. */
     address: "Ward No 18, Street of Moti Luhar, Barwala, Hisar, Haryana 125121",
+    /**
+     * The same address in parts, for structured data.
+     *
+     * It lives here rather than being typed again in the JSON-LD because it
+     * already drifted once: the JSON-LD hard-coded Gurugram, so the page told a
+     * reader the registered office was in Hisar while telling Google it was in
+     * Gurugram. Gurugram is where Rattan works and where the terms put
+     * jurisdiction — it is not the registered address of the entity.
+     */
+    postalAddress: {
+      streetAddress: "Ward No 18, Street of Moti Luhar, Barwala",
+      addressLocality: "Hisar",
+      addressRegion: "Haryana",
+      postalCode: "125121",
+      addressCountry: "IN",
+    },
     gstRegistered: true,
     gstin: "06FIQPD3056Q2ZM",
   },
