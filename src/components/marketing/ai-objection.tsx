@@ -49,8 +49,8 @@ export function AiObjection() {
                     </strong>{" "}
                     84% of talent leaders plan to use AI in recruiting this year, and 52%
                     are adding autonomous AI agents to their teams &mdash; yet 73% still
-                    rank critical thinking as the number one skill they want in a human
-                    recruiter, ahead of AI proficiency.
+                    name critical thinking their number one priority when evaluating who
+                    to hire.
                   </p>
                   <SourceLine
                     source="Korn Ferry, 12th Annual Talent Acquisition Trends, 1,670+ talent leaders"

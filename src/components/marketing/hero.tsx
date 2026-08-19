@@ -8,7 +8,7 @@ import { formatBatchDate, formatINR } from "@/lib/utils";
 
 const microProofs = [
   { icon: Radio, label: "Live, not recorded" },
-  { icon: BookOpen, label: "Recordings + 60-page handbook" },
+  { icon: BookOpen, label: "Recordings + 60+ page handbook" },
   { icon: Award, label: "Certificate on completion" },
 ];
 

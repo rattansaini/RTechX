@@ -91,8 +91,24 @@ export default function ContactPage() {
 
         <div className="mt-10 border-t border-line pt-6 text-[0.9375rem] leading-relaxed text-ink-400">
           <p className="font-semibold text-ink">{site.legal.entity}</p>
-          {site.legal.address && <p className="mt-1">{site.legal.address}</p>}
-          <p className="mt-1">{instructor.location}</p>
+          {/* Labelled because these are two different places and the page showed
+              them as consecutive unlabelled lines: a Hisar address followed by
+              "Gurugram, India" reads as one address naming two cities, which is
+              the kind of thing that makes a buyer hesitate next to a payment
+              form. Both are true — the registered office is in Hisar, Rattan
+              teaches from Gurugram, and the terms name Gurugram courts. */}
+          {site.legal.address && (
+            <p className="mt-2">
+              <span className="text-ink-300">Registered office</span>
+              <br />
+              {site.legal.address}
+            </p>
+          )}
+          <p className="mt-3">
+            <span className="text-ink-300">Sessions run from</span>
+            <br />
+            {instructor.location}
+          </p>
           <p className="mt-4 text-sm">{site.disclaimer}</p>
         </div>
       </div>

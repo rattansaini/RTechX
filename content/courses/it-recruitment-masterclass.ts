@@ -320,10 +320,6 @@ export const itRecruitmentMasterclass: Course = {
       a: "No. You are not going to write code. You are going to learn to read a tech JD, tell which skills actually matter, and recognise real evidence in a resume. We start from zero on the technology.",
     },
     {
-      q: "Will I get a job? Do you provide placement?",
-      a: "No, and we won’t pretend otherwise. There is no placement guarantee and no hiring partner list. What you get is the skill, the artifacts you built during the course, and a 65-question interview bank aimed at entry-level IT-recruiter interviews. The applying is yours.",
-    },
-    {
       q: "What language is it taught in?",
       a: "English, with Hindi used freely wherever it makes a concept land faster. Every written resource — handbook, templates, Boolean library — is in English.",
     },
@@ -348,8 +344,8 @@ export const itRecruitmentMasterclass: Course = {
       a: "No. Days 1–3 are global-aware and apply anywhere. Days 4 and 5 are the India and US specialisation, because those are the two markets that actually pay Indian recruiters.",
     },
     {
-      q: "Will this course get me a job?",
-      a: "Honestly: no course can promise that, and you should be careful with any that does. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India’s IT staffing segment grew 16.1% year-on-year, and GCCs are projected to hire over five lakh people in 2026. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
+      q: "Will I get a job? Do you provide placement?",
+      a: "No, and we won’t pretend otherwise. There is no placement guarantee and no hiring partner list — and you should be careful with any course that offers one. What we can tell you is what the course gives you and what the market looks like.\n\nYou leave with the artifacts a hiring manager asks about in an interview — completed intake sheets, Boolean strings you wrote, scored resumes, a candidate submission and a recorded practice screening call — plus preparation for the 65 questions that come up in entry-level IT recruiter interviews. You will be able to answer “how would you source a Java developer?” with a demonstration instead of a definition.\n\nOn the market: India’s IT staffing segment grew 16.1% year-on-year, and GCCs are projected to hire over five lakh people in 2026. The opportunity is real. Whether you convert it depends on how you interview and how much you practise after the sessions end.",
       source:
         "Indian Staffing Federation, Flexi Staffing Employment Trends, Q3 FY2025-26 · foundit Insights Tracker, July 2026",
     },

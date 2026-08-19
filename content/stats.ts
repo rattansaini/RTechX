@@ -41,7 +41,7 @@ export const stats: Stat[] = [
     id: "critical-thinking",
     value: "73%",
     label:
-      "Of talent leaders rank critical thinking as the top skill for human recruiters — above AI proficiency",
+      "Of talent leaders name critical thinking their number one priority when evaluating who to hire",
     source: "Korn Ferry, 12th Annual Talent Acquisition Trends",
     asOf: "2026",
   },
