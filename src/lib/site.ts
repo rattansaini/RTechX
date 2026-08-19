@@ -19,9 +19,15 @@ export const site = {
   },
 
   /** Not yet published — the footer skips any social whose href is null. */
+  /**
+   * Anything set here renders as a footer link and is added to the site's
+   * structured data, so a search engine can connect the profile to the brand.
+   * Leave a channel null until it actually exists — an empty profile linked
+   * from the footer is worse than no link.
+   */
   socials: {
     linkedin: null as string | null,
-    instagram: null as string | null,
+    instagram: "https://www.instagram.com/rtechx_official/" as string | null,
     youtube: null as string | null,
   },
 
