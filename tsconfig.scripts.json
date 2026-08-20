@@ -1,0 +1,14 @@
+{
+  // Scripts-only config. `server-only` exists to fail the build if server code
+  // is pulled into a client bundle — a real protection the app keeps. A plain
+  // Node script is neither, so it is stubbed here rather than being removed
+  // from the app's tsconfig, where it is doing its job.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/content/*": ["./content/*"],
+      "@/*": ["./src/*"],
+      "server-only": ["./tests/stubs/server-only.ts"]
+    }
+  }
+}
