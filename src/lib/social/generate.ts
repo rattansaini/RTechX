@@ -108,7 +108,11 @@ export async function generateContent(input: GenerateInput): Promise<GeneratedCo
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 2000,
+      // 2000 truncated the JSON mid-object on a long caption, which surfaced as
+      // "model did not return valid JSON" — a confusing error for a request that
+      // was simply cut off. Output is billed on what is produced, not on the
+      // ceiling, so a generous limit costs nothing and removes the failure.
+      max_tokens: 8000,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userPrompt }],
     }),
@@ -119,6 +123,15 @@ export async function generateContent(input: GenerateInput): Promise<GeneratedCo
   }
 
   const data = await res.json();
+
+  // Say plainly what happened. A truncated response is not malformed JSON, and
+  // debugging it as if it were wastes the time of whoever reads the log next.
+  if (data.stop_reason === "max_tokens") {
+    throw new Error(
+      "The model hit the output limit before finishing the JSON. Raise max_tokens."
+    );
+  }
+
   const text = (data.content ?? [])
     .filter((b: { type: string }) => b.type === "text")
     .map((b: { text: string }) => b.text)
@@ -161,10 +174,36 @@ export function applyGuardrails(c: GeneratedContent, expectedFormat: PostFormat)
   );
   if (!hasCta) issues.push("no approved CTA found");
 
-  // A numeric claim with no source line is the exact failure mode we care about.
+  // A numeric claim with no source is the exact failure mode we care about.
+  //
+  // This used to test for the literal string "source:", which is a check on
+  // formatting, not on substance — it flagged "foundit Insights Tracker, July
+  // 2026" as unsourced because the model had not typed the prefix, and it would
+  // equally have passed a line reading "Source: trust me". Two good posts were
+  // thrown away that way before it was noticed.
+  //
+  // What the brand actually requires is a named publisher *and* a date, so that
+  // is what gets checked. Stricter where it counts, indifferent to wording.
   const hasNumbers = /\d+(\.\d+)?\s?(%|percent|crore|lakh|billion|million)/i.test(haystack);
-  const hasSource = /source:/i.test(c.source_line ?? "");
-  if (hasNumbers && !hasSource) issues.push("numeric claim without a source line");
+  const source = (c.source_line ?? "").trim();
+  const namesPublisher = source.replace(/^source:\s*/i, "").trim().length >= 8;
+  const namesDate = /\b(19|20)\d{2}\b|\bFY\s?\d{2}/i.test(source);
+  if (hasNumbers && !(namesPublisher && namesDate)) {
+    issues.push(
+      !source
+        ? "numeric claim with no source line at all"
+        : !namesDate
+          ? `source line names no date: "${source}"`
+          : `source line names no publisher: "${source}"`
+    );
+  }
+
+  // Normalise the prefix once the line has passed, so every graphic reads the
+  // same regardless of how the model phrased it.
+  // Matches "Sources:" as well as "Source:". Checking only the singular
+  // produced "Source: Sources: foundit Insights Tracker…" on a finished
+  // graphic — the tidy-up making the thing it was tidying worse.
+  if (source && !/^sources?\s*:/i.test(source)) c.source_line = `Source: ${source}`;
 
   if (c.format === "reel" && (!c.reel_beats || c.reel_beats.length < 4)) {
     issues.push("reel has fewer than 4 beats");

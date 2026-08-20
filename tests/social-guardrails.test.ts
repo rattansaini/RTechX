@@ -51,7 +51,7 @@ describe("applyGuardrails", () => {
       "still"
     );
     expect(out.has_verified_source).toBe(false);
-    expect(out.angle).toContain("numeric claim without a source line");
+    expect(out.angle).toContain("numeric claim with no source line at all");
   });
 
   it.each([
@@ -98,6 +98,54 @@ describe("applyGuardrails", () => {
       );
       expect(out.has_verified_source).toBe(true);
     }
+  });
+
+  it("accepts a real source line that omits the word 'Source'", () => {
+    // The check used to demand the literal prefix, so this exact shape — a
+    // named publisher with a date — was thrown away as unsourced.
+    const out = applyGuardrails(
+      content({
+        headline: "GCCs are projected to add 5.1 lakh roles.",
+        source_line: "foundit Insights Tracker, July 2026",
+      }),
+      "still"
+    );
+    expect(out.has_verified_source).toBe(true);
+    // …and it is normalised so every graphic reads the same.
+    expect(out.source_line).toBe("Source: foundit Insights Tracker, July 2026");
+  });
+
+  it.each([
+    ["foundit Insights Tracker, July 2026", "Source: foundit Insights Tracker, July 2026"],
+    ["Source: foundit Insights Tracker, July 2026", "Source: foundit Insights Tracker, July 2026"],
+    // The plural is what the model actually wrote when given two references,
+    // and prefixing it again produced "Source: Sources: …" on a real graphic.
+    ["Sources: foundit, July 2026; Korn Ferry, 2026", "Sources: foundit, July 2026; Korn Ferry, 2026"],
+    ["sources : foundit, July 2026", "sources : foundit, July 2026"],
+  ])("normalises %s without doubling the prefix", (given, expected) => {
+    const out = applyGuardrails(
+      content({ headline: "GCCs will add 5.1 lakh roles.", source_line: given }),
+      "still"
+    );
+    expect(out.source_line).toBe(expected);
+    expect(out.has_verified_source).toBe(true);
+  });
+
+  it("still rejects a source line with no date", () => {
+    const out = applyGuardrails(
+      content({ headline: "Hiring grew 16% this year.", source_line: "Source: industry data" }),
+      "still"
+    );
+    expect(out.has_verified_source).toBe(false);
+    expect(out.angle).toContain("names no date");
+  });
+
+  it("still rejects a source line that names nobody", () => {
+    const out = applyGuardrails(
+      content({ headline: "Hiring grew 16% this year.", source_line: "2026" }),
+      "still"
+    );
+    expect(out.has_verified_source).toBe(false);
   });
 
   it("catches lakh and crore claims, not just percentages", () => {
