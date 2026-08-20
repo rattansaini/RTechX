@@ -33,8 +33,8 @@ export default function ThankYouPage() {
       icon: MessageCircle,
       title: whatsappGroup ? "Join the batch WhatsApp group" : "Watch your WhatsApp",
       body: whatsappGroup
-        ? "The joining link and the day-before reminder go out there first, with the Resume Playbook alongside them. Your Field Kit follows after Day 1, and the full handbook after Day 3."
-        : "We'll send the joining link to the number you gave us before Day 1, with the Resume Playbook alongside it. Your Field Kit follows after Day 1, and the full handbook after Day 3.",
+        ? "The joining link and the day-before reminder go out there first. The 63-page handbook follows after Day 3. The Field Kit and Resume Playbook are already yours — grab them from the free resources page whenever you like."
+        : "We'll send the joining link to the number you gave us before Day 1, and the 63-page handbook after Day 3. The Field Kit and Resume Playbook are already yours — grab them from the free resources page whenever you like.",
     },
     {
       icon: CalendarPlus,

@@ -223,10 +223,37 @@ figure tells you which campaign actually paid for itself.
 
 ## Course materials
 
-Four PDFs, different audiences. **Only one of them lives in this repo.**
+Four PDFs. **Three are public. One is not, and that one is the product.**
 
 | File | Who gets it | Where it lives |
 |---|---|---|
+| Free Boolean Cheat Sheet (4pp) | anyone who submits the form | `public/resources/` |
+| The Boolean & Intake Field Kit (20pp) | anyone — direct download | `public/resources/` |
+| The Resume Playbook (16pp) | anyone — direct download | `public/resources/` |
+| IT Recruitment Student Handbook (63pp) | paying students who attend, after Day 3 | **not in this repo** |
+
+The Field Kit and the Resume Playbook were student-only bonuses until 20 August
+2026, when Rattan chose to give them away. That decision is effectively
+permanent: a PDF on a public URL gets copied, forwarded and re-hosted, so
+removing the file later removes the link and not much else. It was made with
+that understood.
+
+**The handbook is the line.** Anything under `public/` is served to anyone who
+knows the URL, with no authentication of any kind. The handbook is the course
+written down — putting it there would give the product away, and the link would
+spread through the same WhatsApp groups the students are in. Do not add it,
+even temporarily.
+
+Delivery is now much simpler than it was. The two free PDFs need no sending at
+all; students download them like anyone else. Rattan sends the handbook after
+Day 3, over WhatsApp or email. The confirmation email, `/thank-you` and the
+course page all describe exactly that — if the process changes, those need
+changing with it or the site promises something that does not happen.
+
+Note the 1+1 bonus doubles the send list: 20 paid seats can mean up to 40
+people expecting the handbook.
+
+---|---|---|
 | Free Boolean Cheat Sheet (4pp) | anyone who submits the form | `public/resources/` — public by design |
 | The Resume Playbook (16pp) | paying students, with their joining details before Day 1 | **not in this repo** |
 | Boolean & Intake Field Kit (20pp) | paying students, after Day 1 | **not in this repo** |
