@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { loadOgFonts } from "@/lib/og-font";
+import { BRAND_MARK_DATA_URI, BRAND_MARK_ASPECT } from "../brand-mark";
 import type { NextRequest } from "next/server";
 
 export const runtime = "edge";
@@ -159,13 +160,25 @@ export async function GET(req: NextRequest) {
             >
               {sourceLine}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            {/* Mark + wordmark as one lockup. The mark is inlined base64, so a
+                graphic can never render without the brand on it — which is the
+                whole point of putting it here rather than fetching it. */}
+            <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+              <img
+                src={BRAND_MARK_DATA_URI}
+                width={86}
+                height={Math.round(86 / BRAND_MARK_ASPECT)}
+                alt=""
+                style={{ display: "flex" }}
+              />
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
               <div style={{ display: "flex", fontFamily: "Display", fontWeight: 800, fontSize: 30, color: "#FFFFFF", letterSpacing: -0.5 }}>
                 RTechX
               </div>
               <div style={{ display: "flex", fontFamily: "Mono", fontWeight: 400, fontSize: 17, color: FOOTER, marginTop: 5, letterSpacing: 0.5 }}>
                 rtechx.com
               </div>
+            </div>
             </div>
           </div>
         </div>
