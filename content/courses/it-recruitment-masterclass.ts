@@ -75,7 +75,7 @@ export const itRecruitmentMasterclass: Course = {
       bullets: [
         "Sourcing strategy",
         "Boolean operators and how to build a string step by step",
-        "10 ready role-family search strings",
+        "Boolean strings built live, role family by role family",
         "LinkedIn Basic vs Recruiter workflows",
         "Job portals",
         "ATS stages and note-writing standards",
@@ -142,13 +142,13 @@ export const itRecruitmentMasterclass: Course = {
         // while the workshop grid said "Zoom or Google Meet" meant two answers
         // to the same question on one page.
         "Days 1–3, live online",
-        "Session recordings",
+        "Session recordings, shared within 7 days",
         "60+ page handbook (PDF)",
         "Intake templates and Boolean library",
         "100-point screening scorecard",
         "65-question interview prep bank",
         "Certificate on completion",
-        "Doubt-support window",
+        "One 1-to-1 doubt-clearing session",
       ],
     },
     {
@@ -172,32 +172,16 @@ export const itRecruitmentMasterclass: Course = {
   ],
 
   // Only `available: true` bonuses render — flipping the flag is the whole
-  // mechanism, nothing else needs changing. All three describe documents or
-  // arrangements that exist; none of them carry a made-up rupee valuation.
+  // mechanism, nothing else needs changing.
+  // The Field Kit and the Resume Playbook used to sit here. Both are now free
+  // public downloads on /free-resources, so presenting them as buyer-only
+  // extras would be a straightforward lie — anyone can have them without
+  // paying. What remains is the one thing a buyer genuinely gets that a
+  // visitor cannot: a second seat.
+  //
+  // The rest moved into `inclusions`, which is the honest home for it: things
+  // the course comes with, not a bonus stack inflating the offer.
   bonuses: [
-    {
-      id: "field-kit",
-      title: "The Boolean & Intake Field Kit",
-      body: "A 20-page working document, yours after Day 1. Not a summary of the session — the strings and templates themselves, ready to run.",
-      points: [
-        "35 ready-to-run search strings across every major IT role family",
-        "The operator rules that differ platform to platform",
-        "The intake, screening and submission templates used in the sessions",
-      ],
-      available: true,
-    },
-    {
-      id: "resume-playbook",
-      title: "The Resume Playbook",
-      body: "A 16-page guide sent with your joining details, before Day 1. Written by a working TA lead, so it debunks as much as it teaches — including the 75% ATS auto-rejection figure everybody repeats and nobody sources.",
-      points: [
-        "Three complete worked recruiter resumes — including one for people with no recruiting experience yet",
-        "What eleven role families must prove, and the tell when a resume doesn’t",
-        "Bullet formulas for impact, plus what to write when you genuinely have no numbers",
-        "A twenty-point check to run before you send, and a fifteen-minute tailoring routine",
-      ],
-      available: true,
-    },
     {
       id: "bring-a-friend",
       title: "1+1 — bring a friend",
@@ -213,14 +197,14 @@ export const itRecruitmentMasterclass: Course = {
 
   inclusions: [
     { title: "60+ page handbook", detail: "The full course in PDF — yours to keep." },
-    { title: "Boolean library", detail: "10 ready role-family search strings you can run the same evening." },
+    { title: "Boolean library", detail: "35 ready-to-run search strings you can run the same evening — the Field Kit, free to anyone." },
     { title: "Intake templates", detail: "The requirement intake sheet and must-have matrix used on Day 1." },
     { title: "Screening scorecards", detail: "The 100-point evidence-based resume scorecard from Day 2." },
     { title: "Submission template", detail: "The format hiring managers actually read to the end." },
     { title: "65-question interview bank", detail: "What entry-level IT-recruiter interviews really ask." },
-    { title: "Session recordings", detail: "Every live session, shared after each day." },
-    { title: "Certificate", detail: "Issued on completion." },
-    { title: "Doubt-support window", detail: "Ask questions after the batch ends." },
+    { title: "Session recordings", detail: "Every live session, shared within 7 days of that session." },
+    { title: "Certificate", detail: "Issued on attending every live day of your option — 3 days, or 5 on the ₹999 option." },
+    { title: "1-to-1 doubt session", detail: "One personal session with Rattan after the batch, to work through what didn’t land." },
   ],
 
   resources: [
@@ -309,11 +293,11 @@ export const itRecruitmentMasterclass: Course = {
   faqs: [
     {
       q: "Is it live or recorded?",
-      a: "Live. Every session is taught in real time, and the recording is shared after each day so you can go back over anything. The joining link goes out before Day 1.",
+      a: "Live. Every session is taught in real time, and the recording follows within 7 days so you can go back over anything. The joining link goes out before Day 1.",
     },
     {
       q: "What if I miss a day?",
-      a: "You get the recording for that session, plus the same handbook and templates as everyone else. Bring your questions to the next live day — nothing is gated behind attendance.",
+      a: "You get the recording for that session within 7 days, plus the same handbook and templates as everyone else. Bring your questions to the next live day — nothing is gated behind attendance.",
     },
     {
       q: "Do I need a technical or IT background?",
@@ -325,7 +309,7 @@ export const itRecruitmentMasterclass: Course = {
     },
     {
       q: "Do I get a certificate?",
-      a: "Yes, issued on completion of the batch.",
+      a: "Yes — issued once you have attended every live day of the option you booked: all 3 days on the ₹499 option, or all 5 on the ₹999 one. Watching a recording counts as attending that day.",
     },
     {
       q: "What do I need — a laptop? A LinkedIn Recruiter licence?",

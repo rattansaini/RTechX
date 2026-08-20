@@ -23,7 +23,8 @@ export default function TermsPage() {
       <p>
         Live online training, delivered on Zoom or Google Meet at the dates and times
         shown at the point of sale. Depending on the option you buy, this includes
-        session recordings, a handbook, templates and a certificate of completion.
+        session recordings, a handbook, templates, one 1-to-1 doubt-clearing session
+        and a certificate issued on attending every live day of the option booked.
         The syllabus published on the course page is what we teach.
       </p>
 
@@ -63,8 +64,9 @@ export default function TermsPage() {
       <h2>Attendance and access</h2>
       <p>
         Sessions run live. If you miss one, the recording is shared with everyone in
-        the batch regardless of attendance. Access to recordings and materials is for
-        your personal use, tied to the email you booked with.
+        the batch regardless of attendance, within 7 days of that session. Access to
+        recordings and materials is for your personal use, tied to the email you
+        booked with.
       </p>
 
       <h2>Your conduct</h2>

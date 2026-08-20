@@ -555,7 +555,7 @@ export function CertificatePreview({ course }: { course: Course }) {
       <SectionHeading
         eyebrow="Certificate"
         title="Issued on completion"
-        lead="Attend the live days and your certificate is issued in your name."
+        lead="Attend every live day of the option you booked — 3 days, or 5 on the ₹999 option — and your certificate is issued in your name. A recording counts as attending."
       />
 
       <Reveal className="mt-10">

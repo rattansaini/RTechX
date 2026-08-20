@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import { Check, FileText } from "lucide-react";
 import { EmailCaptureForm } from "@/components/marketing/lead-capture";
 import { BooleanBuilder } from "@/components/marketing/boolean-builder";
 import { FinalCtaBand } from "@/components/marketing/cta-band";
 import { Container } from "@/components/ui/container";
 import { isResourceReady } from "@/lib/resources";
+import { Reveal } from "@/components/motion/reveal";
+import { Button } from "@/components/ui/button";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 export const metadata: Metadata = {
   title: "Free Boolean cheat-sheet",
@@ -20,6 +23,31 @@ const inside = [
   "Ten ready strings, including Java backend, frontend React, data engineer, DevOps/cloud and QA automation",
   "How to widen a search that returns nobody, and tighten one that returns everybody",
   "The three mistakes that make LinkedIn quietly ignore half your query",
+];
+
+const moreFree = [
+  {
+    title: "The Boolean & Intake Field Kit",
+    pages: "20 pages",
+    href: "/resources/rtechx-boolean-intake-field-kit.pdf",
+    body: "The working document, not a summary — the strings and templates themselves, ready to run tonight.",
+    points: [
+      "35 ready-to-run search strings across every major IT role family",
+      "The operator rules that differ platform to platform",
+      "The intake, screening and submission templates used in the sessions",
+    ],
+  },
+  {
+    title: "The Resume Playbook",
+    pages: "16 pages",
+    href: "/resources/rtechx-resume-playbook.pdf",
+    body: "Written by a working TA lead, so it debunks as much as it teaches — including the 75% ATS auto-rejection figure everybody repeats and nobody sources.",
+    points: [
+      "Three complete worked recruiter resumes — including one for people with no recruiting experience yet",
+      "What eleven role families must prove, and the tell when a resume doesn\u2019t",
+      "A twenty-point check to run before you send, and a fifteen-minute tailoring routine",
+    ],
+  },
 ];
 
 export default function FreeResourcesPage() {
@@ -83,6 +111,56 @@ export default function FreeResourcesPage() {
           </div>
         </div>
       </Container>
+
+      {/* The other two, now free as well. They sit below the cheat-sheet rather
+          than beside it because the cheat-sheet is the one built to be read in
+          four pages on a phone — it converts, and these two reward the reader
+          who is already interested. */}
+      <Section id="more-free" tone="paper">
+        <SectionHeading
+          eyebrow="Also free"
+          title="Two more, and they are not samples"
+          lead="These were student-only until August. They are the full documents, not extracts, and nothing is held back for a paid version."
+        />
+
+        <ul className="mt-10 grid gap-5 lg:grid-cols-2">
+          {moreFree.map((r) => (
+            <Reveal as="li" key={r.href} className="h-full">
+              <article className="flex h-full flex-col rounded-card border border-line bg-white p-6">
+                <span className="inline-flex w-fit items-center gap-2 rounded-pill border border-line bg-paper px-3 py-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-400">
+                  <FileText className="size-3.5" aria-hidden="true" />
+                  {r.pages}
+                </span>
+                <h3 className="mt-5 font-display text-xl font-extrabold leading-snug text-ink">
+                  {r.title}
+                </h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-400">{r.body}</p>
+                <ul className="mt-5 flex-1 space-y-2.5">
+                  {r.points.map((point) => (
+                    <li key={point} className="flex gap-2.5 text-[0.9375rem] leading-snug text-ink">
+                      <Check className="mt-0.5 size-4 shrink-0 text-green-ink" aria-hidden="true" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <Button asChild variant="secondary" size="md">
+                    <a href={r.href} download>
+                      Download the PDF
+                    </a>
+                  </Button>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </ul>
+
+        <p className="mt-8 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-400">
+          No email needed for these two &mdash; the link is the file. The 63-page
+          handbook is the one thing that stays with the course, because it is the
+          course written down.
+        </p>
+      </Section>
 
       <FinalCtaBand />
     </>

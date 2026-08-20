@@ -12,7 +12,7 @@
  * (or an absolute URL if you host it elsewhere).
  */
 
-export type ResourceKey = "boolean-cheatsheet";
+export type ResourceKey = "boolean-cheatsheet" | "resume-playbook" | "field-kit";
 
 export type Resource = {
   key: ResourceKey;
@@ -36,6 +36,31 @@ export const resources: Record<ResourceKey, Resource> = {
     url:
       process.env.NEXT_PUBLIC_BOOLEAN_CHEATSHEET_URL ||
       "/resources/rtechx-boolean-cheat-sheet.pdf",
+  },
+
+  /**
+   * These two were student-only bonuses until Rattan decided on 20 Aug 2026 to
+   * give them away. That decision is not reversible in practice: once a PDF is
+   * on a public URL it is copied, forwarded and re-hosted, so pulling the file
+   * later removes the link, not the file.
+   *
+   * The trade is deliberate — they are the strongest proof of the teaching
+   * quality this brand has, and a recruiter who runs one of these strings and
+   * gets a good shortlist is a warmer lead than any ad. The 63-page handbook
+   * stays paid; that is where the course value now sits.
+   */
+  "resume-playbook": {
+    key: "resume-playbook",
+    source: "resume-playbook",
+    name: "The Resume Playbook",
+    url: "/resources/rtechx-resume-playbook.pdf",
+  },
+
+  "field-kit": {
+    key: "field-kit",
+    source: "field-kit",
+    name: "The Boolean & Intake Field Kit",
+    url: "/resources/rtechx-boolean-intake-field-kit.pdf",
   },
 };
 
