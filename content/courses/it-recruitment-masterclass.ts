@@ -218,7 +218,7 @@ export const itRecruitmentMasterclass: Course = {
 
   batches: [
     {
-      startDate: "2026-09-01",
+      startDate: "2026-10-01",
       timeIST: "8:00–10:00 PM IST",
       platform: "Zoom or Google Meet",
       seats: 20,
