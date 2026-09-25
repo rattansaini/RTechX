@@ -52,9 +52,14 @@ describe("buildBatchIcs", () => {
   });
 
   it("converts 8:00–10:00 PM IST to 14:30–16:30 UTC", () => {
+    // The day is derived, not written in. This assertion is about the timezone
+    // arithmetic — 8pm IST is 14:30 UTC — and moving a batch is an ordinary
+    // business decision that should not fail a test about timezones. It did
+    // exactly that three times: September to October to November.
+    const day = batch.startDate.replace(/-/g, "");
     const ics = build(core);
-    expect(ics).toContain("DTSTART:20260901T143000Z");
-    expect(ics).toContain("DTEND:20260901T163000Z");
+    expect(ics).toContain(`DTSTART:${day}T143000Z`);
+    expect(ics).toContain(`DTEND:${day}T163000Z`);
   });
 
   it("emits CRLF line endings, as RFC 5545 requires", () => {
