@@ -73,7 +73,17 @@ RTechX lives in its own `rtechx` **schema** inside a Supabase project that also
 hosts an unrelated app in `public` — including its own `orders` table that
 would otherwise collide.
 
-Tables: `leads`, `orders`, `enrollments`, `coupons`, plus a `batch_seats` view.
+Tables: `leads`, `orders`, `enrollments`, `coupons`, `social_posts`, plus a
+`batch_seats` view.
+
+**The whole schema is in `supabase/migrations/`.** It was not, until September
+2026, and that was a real hole: the only copy lived inside the hosted project,
+so when Supabase paused it the structure became as unreachable as the data and
+checkout returned 500 to every buyer. Rebuild anywhere with:
+
+```bash
+psql "$DATABASE_URL" -f supabase/migrations/00000000000000_rtechx_schema.sql
+```
 
 RLS is enabled on every table with **zero policies**, deliberately. The
 publishable key can read nothing; only the server-side service role reaches
