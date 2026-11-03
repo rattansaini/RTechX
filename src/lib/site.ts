@@ -76,9 +76,15 @@ export const instructor = {
   ],
 } as const;
 
-export const nav = {
+export type NavItem = { href: string; label: string; tag?: string };
+
+export const nav: {
+  primary: readonly NavItem[];
+  legal: readonly { href: string; label: string }[];
+} = {
   primary: [
     { href: "/courses", label: "Courses" },
+    { href: "/coaching", label: "1:1 Coaching", tag: "New" },
     { href: "/free-resources", label: "Free resources" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
@@ -88,4 +94,4 @@ export const nav = {
     { href: "/legal/privacy", label: "Privacy" },
     { href: "/legal/refund-policy", label: "Refund policy" },
   ],
-} as const;
+};

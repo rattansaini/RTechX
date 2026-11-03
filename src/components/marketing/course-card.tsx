@@ -153,6 +153,48 @@ function LiveCard({ entry }: { entry: Course }) {
   );
 }
 
+const COACHING_TRACKS = [
+  "The complete recruitment cycle",
+  "AI and automation in daily recruiting",
+  "Build your own recruitment tool or AI agent",
+];
+
+/** Custom 1:1 Coaching — a live offer, but booked by call rather than enrolled in a batch. */
+export function CoachingCard({ wide = false }: { wide?: boolean }) {
+  return (
+    <article
+      className={`group relative flex h-full flex-col rounded-card border border-line bg-white p-6 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_16px_40px_-20px_rgba(10,31,68,0.3)] ${wide ? "sm:p-8" : ""}`}
+    >
+      <span className="inline-flex w-fit items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-blue-700">
+        <span className="size-1.5 rounded-full bg-green" aria-hidden="true" />
+        Book a call
+      </span>
+      <h3 className="mt-4 text-xl font-bold leading-snug text-ink">
+        <Link href="/coaching" className="after:absolute after:inset-0">
+          Custom 1:1 Coaching
+        </Link>
+      </h3>
+      <ul className="mt-4 flex-1 space-y-2">
+        {COACHING_TRACKS.map((t) => (
+          <li key={t} className="flex gap-2.5 text-[0.9375rem] leading-snug text-ink">
+            <Check className="mt-0.5 size-4 shrink-0 text-green-ink" aria-hidden="true" />
+            <span>{t}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-5 text-[0.9375rem] font-semibold text-ink">
+        20-min call ₹299 + GST · deducted if you join
+      </p>
+      <div className="mt-4 border-t border-line pt-4">
+        <span className="inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-blue-700">
+          See how it works
+          <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
+      </div>
+    </article>
+  );
+}
+
 function LockedCard({ entry }: { entry: ComingSoonCourse }) {
   return (
     <article className="flex h-full flex-col rounded-card border border-dashed border-line bg-paper p-6">
