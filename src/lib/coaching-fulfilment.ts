@@ -1,4 +1,5 @@
 import "server-only";
+import { sendCoachingPaidNotice, sendCoachingReceipt } from "@/lib/coaching-email";
 import { supabaseAdmin } from "@/lib/supabase";
 
 /**
@@ -70,7 +71,13 @@ export async function fulfilCoachingPayment(input: {
     return { ok: true, alreadyProcessed: true, id: existing.id };
   }
 
-  return { ok: true, alreadyProcessed: false, id: existing.id, row: won[0] as CoachingRow };
+  const row = won[0] as CoachingRow;
+
+  // Only the caller that won the update gets here, so each email goes once.
+  // Sent in parallel; neither can throw.
+  await Promise.all([sendCoachingReceipt(row), sendCoachingPaidNotice(row)]);
+
+  return { ok: true, alreadyProcessed: false, id: existing.id, row };
 }
 
 /** Records a failed payment without touching a row that already succeeded. */

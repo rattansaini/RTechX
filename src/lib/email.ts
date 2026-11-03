@@ -9,12 +9,12 @@ export function isEmailConfigured() {
   return Boolean(process.env.RESEND_API_KEY);
 }
 
-const INK = "#0A1F44";
-const MUTED = "#55688D";
-const LINE = "#E2E8F3";
-const BLUE = "#0060F0";
+export const INK = "#0A1F44";
+export const MUTED = "#55688D";
+export const LINE = "#E2E8F3";
+export const BLUE = "#0060F0";
 
-function shell(inner: string) {
+export function shell(inner: string) {
   return `<div style="background:#F7F9FC;padding:32px 16px">
   <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;background:#fff;border:1px solid ${LINE};border-radius:16px;padding:32px;color:${INK}">
     ${inner}
@@ -174,7 +174,7 @@ export async function sendEnrolmentEmail(input: {
   return { skipped: false as const, id: data?.id };
 }
 
-function escapeHtml(value: string) {
+export function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
