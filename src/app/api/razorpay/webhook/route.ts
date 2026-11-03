@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { fulfilCoachingPayment, markCoachingFailed } from "@/lib/coaching-fulfilment";
 import { fulfilOrder, markOrderFailed } from "@/lib/fulfilment";
 import { verifyWebhookSignature } from "@/lib/razorpay";
 
@@ -38,7 +39,16 @@ export async function POST(req: Request) {
 
   let event: {
     event?: string;
-    payload?: { payment?: { entity?: { id?: string; order_id?: string; error_description?: string } } };
+    payload?: {
+      payment?: {
+        entity?: {
+          id?: string;
+          order_id?: string;
+          error_description?: string;
+          notes?: { product?: string } | unknown[];
+        };
+      };
+    };
   };
   try {
     event = JSON.parse(rawBody);
@@ -55,12 +65,46 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, ignored: "no order id" });
   }
 
+  // Custom 1:1 Coaching payments carry notes.product = "coaching" (set when
+  // the order is created). Everything else takes the original path below,
+  // untouched.
+  const notes = payment?.notes;
+  const isCoaching =
+    !!notes && !Array.isArray(notes) && (notes as { product?: string }).product === "coaching";
+
+  if (isCoaching) {
+    if (event.event === "payment.captured") {
+      const result = await fulfilCoachingPayment({
+        razorpayOrderId: orderId,
+        razorpayPaymentId: paymentId,
+        via: "webhook",
+      });
+      return NextResponse.json({ ok: true, result: { ok: result.ok } });
+    }
+    if (event.event === "payment.failed") {
+      await markCoachingFailed(orderId);
+      return NextResponse.json({ ok: true });
+    }
+    return NextResponse.json({ ok: true, ignored: event.event ?? "unknown" });
+  }
+
   if (event.event === "payment.captured") {
     const result = await fulfilOrder({
       razorpayOrderId: orderId,
       razorpayPaymentId: paymentId,
       via: "webhook",
     });
+    // Order notes are not guaranteed to be echoed on the payment entity, so a
+    // coaching payment can also arrive here. An order we don't know falls
+    // through to the coaching table; a known order is handled exactly as before.
+    if (!result.ok && result.reason === "order-not-found") {
+      const coaching = await fulfilCoachingPayment({
+        razorpayOrderId: orderId,
+        razorpayPaymentId: paymentId,
+        via: "webhook",
+      });
+      return NextResponse.json({ ok: true, result: { ok: coaching.ok } });
+    }
     // Always 200. Razorpay retries non-2xx, and retrying a missing order or a
     // content lookup failure will never succeed — it just floods the log.
     return NextResponse.json({ ok: true, result });
@@ -68,6 +112,7 @@ export async function POST(req: Request) {
 
   if (event.event === "payment.failed") {
     await markOrderFailed(orderId, payment?.error_description ?? "payment_failed");
+    await markCoachingFailed(orderId); // no-op unless this is a coaching order
     return NextResponse.json({ ok: true });
   }
 

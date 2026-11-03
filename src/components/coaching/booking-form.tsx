@@ -30,6 +30,7 @@ type RazorpayOptions = {
   description: string;
   order_id: string;
   prefill: { name: string; email: string; contact: string };
+  notes?: Record<string, string>;
   theme?: { color: string };
   handler: (r: RazorpayResponse) => void;
   modal?: { ondismiss?: () => void };
@@ -151,6 +152,7 @@ export function BookingForm({
         description: "Custom 1:1 Coaching — 20-minute call",
         order_id: order.razorpayOrderId,
         prefill: order.prefill,
+        notes: { product: "coaching" },
         theme: { color: "#0060F0" },
         modal: { ondismiss: () => setSubmitting(false) },
         handler: async (response) => {
