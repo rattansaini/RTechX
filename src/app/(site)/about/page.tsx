@@ -99,7 +99,7 @@ export default function AboutPage() {
               </p>
               <p>
                 Three evenings, because that&rsquo;s genuinely how long the
-                foundations take when nobody pads them. ₹499, because the barrier
+                foundations take when nobody pads them. ₹999, because the barrier
                 shouldn&rsquo;t be money for someone trying to get into this field.
                 Live, because the part that actually teaches you is watching a search
                 fail and then get fixed &mdash; and you cannot record that honestly.

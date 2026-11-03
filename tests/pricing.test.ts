@@ -29,7 +29,7 @@ describe("resolvePrice", () => {
     });
     expect("error" in p).toBe(false);
     if ("error" in p) return;
-    expect(p.totalPaise).toBe(49_900);
+    expect(p.totalPaise).toBe(99_900);
     expect(p.isUpgrade).toBe(false);
   });
 
@@ -40,7 +40,7 @@ describe("resolvePrice", () => {
       isUpgrade: false,
     });
     if ("error" in p) throw new Error(p.error);
-    expect(p.totalPaise).toBe(99_900);
+    expect(p.totalPaise).toBe(199_900);
   });
 
   it("charges only the difference on an upgrade", async () => {
@@ -50,9 +50,9 @@ describe("resolvePrice", () => {
       isUpgrade: true,
     });
     if ("error" in p) throw new Error(p.error);
-    // ₹999 − ₹499. Someone who already paid for the 3-day must never be billed
-    // the full ₹999 a second time.
-    expect(p.totalPaise).toBe(50_000);
+    // ₹1,999 − ₹999. Someone who already paid for the 3-day must never be billed
+    // the full ₹1,999 a second time.
+    expect(p.totalPaise).toBe(100_000);
     expect(p.isUpgrade).toBe(true);
   });
 
@@ -90,7 +90,7 @@ describe("resolvePrice", () => {
     });
     if ("error" in p) throw new Error(p.error);
     expect(p.discountPaise).toBe(0);
-    expect(p.totalPaise).toBe(49_900);
+    expect(p.totalPaise).toBe(99_900);
   });
 
   it("never returns a total below Razorpay's ₹1 floor", async () => {
