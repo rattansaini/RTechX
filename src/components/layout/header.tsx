@@ -16,7 +16,7 @@ const checkoutPath = `/checkout/${flagshipCourse.slug}?tier=core`;
 const corePrice = formatINR(tierById(flagshipCourse, "core")?.priceINR ?? 0);
 
 /**
- * Where "Join for ₹499" should go depends on where the reader already is.
+ * Where "Join for ₹999" should go depends on where the reader already is.
  *
  * Elsewhere on the site it means "show me this course" — dropping a stranger
  * into a payment form before they have read anything converts worse and reads

@@ -15,7 +15,7 @@ export const itRecruitmentMasterclass: Course = {
 
   hookLine: "Most recruiters can’t read the JD they’re hiring for.",
   subHook:
-    "That’s the gap. Three live evenings to close it — ₹499, or ₹999 with two live days on India and US hiring.",
+    "That’s the gap. Three live evenings to close it — ₹999, or ₹1,999 with two live days on India and US hiring.",
   cardSummary:
     "Read a tech JD, build the Boolean, screen the candidate. Three live evenings, taught by a recruiter who still hires every day.",
 
@@ -133,7 +133,7 @@ export const itRecruitmentMasterclass: Course = {
     {
       id: "core",
       name: "IT Recruitment Masterclass",
-      priceINR: 499,
+      priceINR: 999,
       // No compareAtINR: this course has never been sold at a higher price, so
       // a strikethrough would be a false discount claim.
       durationLabel: "3 days · 2 hrs/day · Live",
@@ -154,7 +154,7 @@ export const itRecruitmentMasterclass: Course = {
     {
       id: "full",
       name: "Masterclass + Geo Specialisation",
-      priceINR: 999,
+      priceINR: 1999,
       durationLabel: "5 days · 2 hrs/day · Live",
       highlight: true,
       // Only the extras — core's items are resolved via `inheritsFrom`, which
@@ -167,7 +167,7 @@ export const itRecruitmentMasterclass: Course = {
         "Visa awareness for US requirements",
         "You do a live search while we watch",
       ],
-      razorpayNotes: "Upgrade from core is charged as the ₹500 difference.",
+      razorpayNotes: "Upgrade from core is charged as the ₹1,000 difference.",
     },
   ],
 
@@ -203,7 +203,7 @@ export const itRecruitmentMasterclass: Course = {
     { title: "Submission template", detail: "The format hiring managers actually read to the end." },
     { title: "65-question interview bank", detail: "What entry-level IT-recruiter interviews really ask." },
     { title: "Session recordings", detail: "Every live session, shared within 7 days of that session." },
-    { title: "Certificate", detail: "Issued on attending every live day of your option — 3 days, or 5 on the ₹999 option." },
+    { title: "Certificate", detail: "Issued on attending every live day of your option — 3 days, or 5 on the ₹1,999 option." },
     { title: "1-to-1 doubt session", detail: "One personal session with Rattan after the batch, to work through what didn’t land." },
   ],
 
@@ -218,7 +218,7 @@ export const itRecruitmentMasterclass: Course = {
 
   batches: [
     {
-      startDate: "2026-11-01",
+      startDate: "2026-12-01",
       timeIST: "8:00–10:00 PM IST",
       platform: "Zoom or Google Meet",
       seats: 20,
@@ -309,7 +309,7 @@ export const itRecruitmentMasterclass: Course = {
     },
     {
       q: "Do I get a certificate?",
-      a: "Yes — issued once you have attended every live day of the option you booked: all 3 days on the ₹499 option, or all 5 on the ₹999 one. Watching a recording counts as attending that day.",
+      a: "Yes — issued once you have attended every live day of the option you booked: all 3 days on the ₹999 option, or all 5 on the ₹1,999 one. Watching a recording counts as attending that day.",
     },
     {
       q: "What do I need — a laptop? A LinkedIn Recruiter licence?",
@@ -320,8 +320,8 @@ export const itRecruitmentMasterclass: Course = {
       a: "Payment is through Razorpay — UPI, cards, netbanking, wallets and EMI. Attend Day 1, and if it isn’t what you expected, email us before Day 2 begins for a full refund. Full terms are on the refund policy page.",
     },
     {
-      q: "Can I upgrade from ₹499 to ₹999 later?",
-      a: "Yes. Join the 3-day batch first, and if you want Days 4 and 5 you pay only the ₹500 difference — not the full ₹999.",
+      q: "Can I upgrade from ₹999 to ₹1,999 later?",
+      a: "Yes. Join the 3-day batch first, and if you want Days 4 and 5 you pay only the ₹1,000 difference — not the full ₹1,999.",
     },
     {
       q: "Is this only for US recruitment?",
@@ -345,9 +345,9 @@ export const itRecruitmentMasterclass: Course = {
   ],
 
   seo: {
-    title: "IT Recruitment Masterclass — live online, ₹499",
+    title: "IT Recruitment Masterclass — live online, ₹999",
     description:
-      "Learn IT recruitment live in 3 evenings: decode tech JDs, build Boolean searches, screen on evidence, and submit with confidence. Taught by a working talent acquisition specialist. ₹499.",
+      "Learn IT recruitment live in 3 evenings: decode tech JDs, build Boolean searches, screen on evidence, and submit with confidence. Taught by a working talent acquisition specialist. ₹999.",
     keywords: [
       "IT recruitment course India",
       "US IT recruiter training online",
