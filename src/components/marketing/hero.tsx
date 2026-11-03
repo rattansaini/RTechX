@@ -63,6 +63,15 @@ export function HomeHero() {
               </Button>
             </div>
 
+            <p className="mt-4">
+              <Link
+                href="/coaching"
+                className="inline-block py-1 text-[0.9375rem] font-semibold text-blue-700 underline underline-offset-4 hover:text-blue"
+              >
+                Need something built around you? Book a 20-min call with Rattan →
+              </Link>
+            </p>
+
             <ul
               className="rise mt-8 flex flex-wrap gap-x-6 gap-y-3"
               style={{ "--rise-delay": "180ms" } as React.CSSProperties}

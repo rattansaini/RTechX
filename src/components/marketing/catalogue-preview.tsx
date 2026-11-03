@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CourseCard } from "@/components/marketing/course-card";
+import { CoachingCard, CourseCard } from "@/components/marketing/course-card";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -21,7 +21,7 @@ export function CataloguePreview() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           eyebrow="The catalogue"
-          title="One course live. More being built."
+          title="Two ways to learn live. More being built."
           lead="Everything is taught live by a working recruiter. Nothing is pre-recorded and resold."
         />
         <Button asChild variant="secondary" className="hidden sm:inline-flex">
@@ -35,15 +35,16 @@ export function CataloguePreview() {
         </Reveal>
       )}
 
-      {(rest.length > 0 || planned.length > 0) && (
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[...rest, ...planned].map((entry) => (
-            <Reveal key={entry.slug} className="h-full">
-              <CourseCard entry={entry} />
-            </Reveal>
-          ))}
-        </div>
-      )}
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal className="h-full">
+          <CoachingCard />
+        </Reveal>
+        {[...rest, ...planned].map((entry) => (
+          <Reveal key={entry.slug} className="h-full">
+            <CourseCard entry={entry} />
+          </Reveal>
+        ))}
+      </div>
 
       <div className="mt-8 sm:hidden">
         <Button asChild variant="secondary" full>

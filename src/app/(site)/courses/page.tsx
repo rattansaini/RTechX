@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseCard } from "@/components/marketing/course-card";
+import { CoachingCard, CourseCard } from "@/components/marketing/course-card";
 import { FinalCtaBand } from "@/components/marketing/cta-band";
 import { Reveal } from "@/components/motion/reveal";
 import { Container } from "@/components/ui/container";
@@ -40,6 +40,9 @@ export default function CoursesPage() {
               <CourseCard entry={course} featured />
             </Reveal>
           ))}
+          <Reveal>
+            <CoachingCard wide />
+          </Reveal>
         </div>
       </Section>
 

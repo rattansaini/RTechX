@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy policy" updated="16 August 2026">
+    <LegalPage title="Privacy policy" updated="3 November 2026">
       <p>
         <strong>{site.legal.entity}</strong> operates RTechX. This page describes
         what we collect, why, and how to get it removed. It is written to be read,
@@ -57,6 +57,15 @@ export default function PrivacyPage() {
         other training providers, recruiters or employers.
       </p>
 
+      <h2>1:1 Coaching bookings</h2>
+      <p>
+        When you book a Custom 1:1 Coaching call we collect your name, email, mobile
+        number and the answers you give on the booking form. We use them to arrange
+        the call and to contact you about it. They are stored in our database, and
+        they are not shared or sold. You can ask us to delete them at{" "}
+        <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+      </p>
+
       <h2>Who processes it for us</h2>
       <ul>
         <li>
@@ -66,6 +75,10 @@ export default function PrivacyPage() {
         <li>
           <strong>Supabase</strong> &mdash; the database holding your booking. Hosted
           in Mumbai, India.
+        </li>
+        <li>
+          <strong>Cal.com</strong> &mdash; the calendar where you pick your coaching
+          call time. It receives your name and email.
         </li>
         <li>
           <strong>Resend</strong> &mdash; sends your confirmation and joining emails.

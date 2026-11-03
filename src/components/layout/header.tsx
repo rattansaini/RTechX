@@ -28,6 +28,14 @@ function joinHrefFor(pathname: string | null) {
   return pathname === coursePath ? checkoutPath : coursePath;
 }
 
+function NewTag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="ml-1.5 rounded-pill bg-blue-50 px-2 py-0.5 align-middle font-mono text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-blue-700">
+      {children}
+    </span>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const joinHref = joinHrefFor(pathname);
@@ -79,9 +87,10 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-field px-3.5 py-2 text-[0.9375rem] font-medium text-ink-400 transition-colors hover:bg-ink/5 hover:text-ink"
+                className="inline-flex items-center rounded-field px-3.5 py-2 text-[0.9375rem] font-medium text-ink-400 transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 {item.label}
+                {item.tag && <NewTag>{item.tag}</NewTag>}
               </Link>
             ))}
           </nav>
@@ -121,6 +130,7 @@ export function Header() {
                 className="rounded-field px-3 py-3.5 text-base font-medium text-ink transition-colors hover:bg-ink/5"
               >
                 {item.label}
+                {item.tag && <NewTag>{item.tag}</NewTag>}
               </Link>
             ))}
             <Button asChild size="lg" full className="mt-3 mb-4">

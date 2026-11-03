@@ -1,3 +1,4 @@
+import { CoachingStrip } from "@/components/marketing/coaching-strip";
 import { AiObjection } from "@/components/marketing/ai-objection";
 import { CataloguePreview } from "@/components/marketing/catalogue-preview";
 import { FinalCtaBand } from "@/components/marketing/cta-band";
@@ -23,6 +24,7 @@ export default function HomePage() {
     <>
       <HomeHero />
       <StatBand />
+      <CoachingStrip />
       <PainStrip painPoints={flagshipCourse.painPoints} />
       <AiObjection />
       <WhyRTechX />

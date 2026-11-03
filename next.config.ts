@@ -58,12 +58,12 @@ const nextConfig: NextConfig = {
               "object-src 'none'",
               "frame-ancestors 'self'",
               "form-action 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://www.googletagmanager.com https://connect.facebook.net",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.razorpay.com https://www.googletagmanager.com https://connect.facebook.net https://app.cal.com https://*.cal.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://*.razorpay.com https://www.google-analytics.com https://www.facebook.com",
+              "img-src 'self' data: blob: https://*.cal.com https://*.razorpay.com https://www.google-analytics.com https://www.facebook.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.razorpay.com https://lumberjack.razorpay.com https://www.google-analytics.com https://connect.facebook.net",
-              "frame-src https://*.razorpay.com https://api.razorpay.com",
+              "connect-src 'self' https://*.razorpay.com https://lumberjack.razorpay.com https://www.google-analytics.com https://connect.facebook.net https://app.cal.com https://*.cal.com",
+              "frame-src https://*.razorpay.com https://api.razorpay.com https://app.cal.com https://*.cal.com",
               // `upgrade-insecure-requests` belongs here when this policy is
               // enforced, but browsers ignore it in report-only mode and log an
               // error saying so — on every page load. That noise would bury the
