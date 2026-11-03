@@ -215,3 +215,32 @@ export async function sendUnpaidBookingWarning(input: {
     text: `Unpaid booking — please check or cancel\n${input.detail}\nName: ${input.attendeeName}\nEmail: ${input.attendeeEmail}\nCall time: ${when}\nCal booking: ${input.bookingUid}`,
   });
 }
+
+/** To Rattan: one ₹299 payment is being used for a second, separate booking. */
+export async function sendSecondBookingWarning(input: {
+  name: string;
+  email: string;
+  firstStart: string | null;
+  secondStart: string | null;
+  firstUid: string;
+  secondUid: string;
+}) {
+  const first = input.firstStart ? formatIST(input.firstStart) : "unknown";
+  const second = input.secondStart ? formatIST(input.secondStart) : "unknown";
+  const inner = `
+    <h1 style="font-size:20px;margin:0 0 8px;color:#B91C1C">Second booking on one payment — please check</h1>
+    <p style="font-size:15px;line-height:1.65;color:${MUTED};margin:0 0 16px">This candidate already has a booked call and has booked another slot on the same ₹299 payment. The record still shows the first booking. Cancel one of them in Cal.com.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      ${row2("Name", escapeHtml(input.name))}
+      ${row2("Email", escapeHtml(input.email))}
+      ${row2("First booking", escapeHtml(first))}
+      ${row2("Second booking", escapeHtml(second))}
+      ${row2("Cal booking (new)", escapeHtml(input.secondUid), true)}
+    </table>`;
+  return send({
+    to: notifyTo(),
+    subject: `Second booking on one payment — ${input.name}`,
+    html: shell(inner),
+    text: `Second booking on one payment — please check\nName: ${input.name}\nEmail: ${input.email}\nFirst booking: ${first} (${input.firstUid})\nSecond booking: ${second} (${input.secondUid})\nCancel one of them in Cal.com.`,
+  });
+}

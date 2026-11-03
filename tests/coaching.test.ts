@@ -7,7 +7,7 @@ import {
   TOTAL_LABEL,
 } from "@/content/coaching";
 import { verifyCalSignature } from "@/lib/cal";
-import { coachingBookingSchema, isValidMobile, normaliseMobile } from "@/lib/coaching";
+import { coachingBookingSchema, isSecondBooking, isValidMobile, normaliseMobile } from "@/lib/coaching";
 
 const valid = {
   fullName: "Asha Verma",
@@ -73,5 +73,20 @@ describe("Cal.com signature", () => {
   it("rejects everything when no secret is set", () => {
     delete process.env.CAL_WEBHOOK_SECRET;
     expect(verifyCalSignature("{}", "abc")).toBe(false);
+  });
+});
+
+describe("one payment, one call", () => {
+  const booked = { call_status: "booked", cal_booking_uid: "uid-1" };
+  it("flags a separate new booking on an already-booked row", () => {
+    expect(isSecondBooking(booked, "BOOKING_CREATED", "uid-2")).toBe(true);
+  });
+  it("allows the first booking, a retry of the same uid, and a reschedule", () => {
+    expect(isSecondBooking({ call_status: "not_booked", cal_booking_uid: null }, "BOOKING_CREATED", "uid-1")).toBe(false);
+    expect(isSecondBooking(booked, "BOOKING_CREATED", "uid-1")).toBe(false);
+    expect(isSecondBooking(booked, "BOOKING_RESCHEDULED", "uid-2")).toBe(false);
+  });
+  it("allows a new booking after the earlier one was cancelled", () => {
+    expect(isSecondBooking({ call_status: "cancelled", cal_booking_uid: "uid-1" }, "BOOKING_CREATED", "uid-2")).toBe(false);
   });
 });

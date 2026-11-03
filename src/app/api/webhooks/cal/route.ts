@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { verifyCalSignature } from "@/lib/cal";
+import { isSecondBooking } from "@/lib/coaching";
 import {
   sendCoachingBookedNotice,
+  sendSecondBookingWarning,
   sendUnpaidBookingWarning,
 } from "@/lib/coaching-email";
 import type { CoachingRow } from "@/lib/coaching-fulfilment";
@@ -123,6 +125,20 @@ export async function POST(req: Request) {
   // Idempotent: a retry of the same event writes the same values and sends no second email.
   if (row.cal_booking_uid === p.uid && row.call_status === "booked") {
     return NextResponse.json({ ok: true, alreadyProcessed: true });
+  }
+
+  // One payment, one call: a separate new booking must not overwrite the
+  // booking already on this row. Keep the first and tell Rattan.
+  if (isSecondBooking(row, trigger, p.uid)) {
+    await sendSecondBookingWarning({
+      name: row.full_name,
+      email: row.email,
+      firstStart: row.call_start_at,
+      secondStart: p.startTime ?? null,
+      firstUid: row.cal_booking_uid ?? "",
+      secondUid: p.uid,
+    });
+    return NextResponse.json({ ok: true, ignored: "second-booking" });
   }
 
   const { error } = await db

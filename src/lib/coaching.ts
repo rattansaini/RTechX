@@ -52,3 +52,21 @@ export const coachingBookingSchema = z
   .strict();
 
 export type CoachingBooking = z.infer<typeof coachingBookingSchema>;
+
+/**
+ * True when a new Cal.com booking would silently replace a different booking
+ * that is already on this paid row — i.e. one ₹299 payment used for two calls.
+ * A reschedule (BOOKING_RESCHEDULED) or a retry of the same uid is not.
+ */
+export function isSecondBooking(
+  row: { call_status: string | null; cal_booking_uid: string | null },
+  trigger: string,
+  uid: string
+) {
+  return (
+    trigger === "BOOKING_CREATED" &&
+    row.call_status === "booked" &&
+    !!row.cal_booking_uid &&
+    row.cal_booking_uid !== uid
+  );
+}

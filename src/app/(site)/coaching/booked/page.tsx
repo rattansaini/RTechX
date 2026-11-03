@@ -106,6 +106,21 @@ export default async function BookedPage({
     );
   }
 
+  if (row.call_status === "booked" && row.call_start_at) {
+    return (
+      <Message title="You're booked">
+        <p>
+          Your call with Rattan is on {formatIST(row.call_start_at)}. The confirmation email from
+          Cal.com has the Google Meet link, plus links to reschedule or cancel.
+        </p>
+        <p>
+          The &#8377;299 is refundable if you cancel at least 24 hours before the call.
+        </p>
+        {whatsapp}
+      </Message>
+    );
+  }
+
   return (
     <Container className="py-10 sm:py-16">
       <div className="mx-auto max-w-4xl">
@@ -113,12 +128,6 @@ export default async function BookedPage({
         <h1 className="mt-3 text-[1.875rem] font-extrabold leading-[1.12] sm:text-4xl">
           Payment received — now pick your time
         </h1>
-        {row.call_status === "booked" && row.call_start_at && (
-          <p className="mt-4 rounded-field border border-blue-200 bg-blue-50 px-4 py-3 text-[0.9375rem] text-ink">
-            You&rsquo;re booked for {formatIST(row.call_start_at)}. Pick a different time below to
-            reschedule.
-          </p>
-        )}
         <div className="mt-8">
           <CalEmbed calLink={calLink} name={row.full_name} email={row.email} refId={row.id} />
         </div>
