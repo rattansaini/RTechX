@@ -15,7 +15,7 @@ export default function RefundPolicyPage() {
   const guarantee = flagshipCourse.guarantee;
 
   return (
-    <LegalPage title="Refund policy" updated="16 August 2026">
+    <LegalPage title="Refund policy" updated="3 November 2026">
       <p>
         We would rather refund you than have you sit through something that
         isn&rsquo;t right for you. This page says exactly when you can ask, and what
@@ -77,6 +77,19 @@ export default function RefundPolicyPage() {
         get a <strong>full refund</strong> or a free transfer to a later batch &mdash;
         your choice. This applies whatever stage the batch has reached.
       </p>
+
+      <h2>1:1 Coaching call (₹299 + GST)</h2>
+      <ul>
+        <li>
+          Full refund if you cancel <strong>24 or more hours before</strong> the
+          call, or if RTechX cancels.
+        </li>
+        <li>No refund for a no-show.</li>
+        <li>
+          If you go on to join the coaching programme, the ₹299 is deducted from
+          your programme fee.
+        </li>
+      </ul>
 
       <h2>Upgrades</h2>
       <p>
