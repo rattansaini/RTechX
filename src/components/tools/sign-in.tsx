@@ -11,7 +11,7 @@ import { TOOLS_TRIAL_DAYS } from "@/content/tools";
  * Two steps: email + consent → 6-digit code by email → signed in.
  * No password, no Google account needed.
  */
-export function ToolsSignIn({ compact = false }: { compact?: boolean }) {
+export function ToolsSignIn({ compact = false, redirectTo }: { compact?: boolean; redirectTo?: string }) {
   const router = useRouter();
   const uid = useId();
   const [step, setStep] = useState<"email" | "code">("email");
@@ -56,7 +56,8 @@ export function ToolsSignIn({ compact = false }: { compact?: boolean }) {
       setBusy(false);
       return setError(r.error ?? "That code didn't work.");
     }
-    router.refresh();
+    if (redirectTo) router.push(redirectTo);
+    else router.refresh();
   }
 
   const field =

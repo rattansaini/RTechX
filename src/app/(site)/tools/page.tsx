@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { AccountBar } from "@/components/tools/account-bar";
 import { TrialEnded } from "@/components/tools/blocks";
 import { BuildStack } from "@/components/tools/build-stack";
 import { ToolsSignIn } from "@/components/tools/sign-in";
@@ -36,7 +35,16 @@ export default async function ToolsPage() {
     <>
       <ToolkitHero>
         {access.state === "active" ? (
-          <AccountBar email={access.user.email} daysLeft={access.daysLeft} endsAt={access.endsAt} />
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" variant="onNavy">
+              <Link href="/tools/dashboard">
+                Open your dashboard <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+            <p className="text-sm text-ink-300">
+              {access.daysLeft} {access.daysLeft === 1 ? "day" : "days"} of free access left
+            </p>
+          </div>
         ) : access.state === "expired" ? (
           <p className="text-[0.9375rem] text-white">
             Your 7 free days have ended.{" "}
@@ -96,18 +104,18 @@ export default async function ToolsPage() {
           <div className="max-w-xl">
             {access.state === "active" && (
               <div className="rounded-card border border-line bg-paper p-6 sm:p-8">
-                <p className="text-lg font-bold text-ink">Pick a tool to start.</p>
+                <p className="text-lg font-bold text-ink">Your workspace is ready.</p>
                 <p className="mt-2 leading-relaxed text-ink-400">
                   {access.daysLeft} {access.daysLeft === 1 ? "day" : "days"} left · {access.dailyLimit - access.usedToday}{" "}
                   of {access.dailyLimit} runs left today.
                 </p>
                 <Button asChild size="lg" className="mt-5">
-                  <Link href="/tools/jd-decoder">Start with the JD Decoder</Link>
+                  <Link href="/tools/dashboard">Open your dashboard</Link>
                 </Button>
               </div>
             )}
             {access.state === "expired" && <TrialEnded />}
-            {access.state === "signed-out" && <ToolsSignIn />}
+            {access.state === "signed-out" && <ToolsSignIn redirectTo="/tools/dashboard" />}
           </div>
         </Container>
       </section>

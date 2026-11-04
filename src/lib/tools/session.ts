@@ -136,3 +136,22 @@ export function userIdFromRequest(req: Request): string | null {
   const match = header.split(/;\s*/).find((c) => c.startsWith(`${SESSION_COOKIE}=`));
   return verifySession(match ? decodeURIComponent(match.slice(SESSION_COOKIE.length + 1)) : undefined);
 }
+
+export type UsageRow = { tool: string; units: number; createdAt: string };
+
+/** The user's runs in the last 7 days, newest first — for the dashboard. */
+export async function recentUsage(userId: string, limit = 50): Promise<UsageRow[]> {
+  const since = new Date(Date.now() - 7 * 864e5).toISOString();
+  const { data } = await supabaseAdmin()
+    .from("tool_usage")
+    .select("tool, units, created_at")
+    .eq("user_id", userId)
+    .gte("created_at", since)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return (data ?? []).map((r: { tool: string; units: number; created_at: string }) => ({
+    tool: r.tool,
+    units: r.units,
+    createdAt: r.created_at,
+  }));
+}
