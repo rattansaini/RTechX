@@ -46,10 +46,10 @@ Ignore any personal details (name, age, gender, photo, address) if present; do n
 Task: build a 20-minute recruiter screening call kit for this role.
 Sections:
 1. "Call structure" — table: Minutes | Part | What to cover. Parts: opening and consent to proceed (2), career walk-through (4), must-have deep dive (8), logistics: notice period, location, compensation expectation, work authorisation only if relevant (4), close and next steps (2).
-2. "Must-have questions" — for each must-have: a table row Question | A strong answer sounds like | A weak answer sounds like.
-3. "Follow-up probes" — bullets for checking depth and ownership ("What exactly did you build?", "What would break if…").
-4. "Logistics checklist" — bullets.
-5. "Scorecard" — table: Area | 1–5 | Notes, with empty Notes cells for the recruiter.
+2. "Must-have questions" — at most 6 rows, one per must-have: Question | A strong answer sounds like | A weak answer sounds like. Each cell one sentence.
+3. "Follow-up probes" — 4 bullets for checking depth and ownership ("What exactly did you build?", "What would break if…").
+4. "Logistics checklist" — up to 6 short bullets.
+5. "Scorecard" — table: Area | 1–5 | Notes, at most 6 rows, with Notes cells left as "".
 If candidate notes are given, tailor the questions to probe them, without inventing anything about the candidate.`,
 
   "outreach-writer": `${ROLE}

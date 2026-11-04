@@ -76,7 +76,7 @@ export async function callClaude(opts: {
     },
     body: JSON.stringify({
       model: process.env.ANTHROPIC_MODEL || DEFAULT_MODEL,
-      max_tokens: opts.maxTokens ?? (opts.brief ? 2600 : 4096),
+      max_tokens: opts.maxTokens ?? (opts.brief ? 3000 : 6000),
       system: `${opts.system}\n\n${OUTPUT_RULES}${
         opts.brief ? "\nThis is one step of a larger report: keep this answer under about 450 words." : ""
       }`,
