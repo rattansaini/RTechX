@@ -38,10 +38,12 @@ function CopyButton({ value }: { value: string }) {
   );
 }
 
-export function ResultView({ result }: { result: ToolResultView }) {
+export function ResultView({ result, bare = false }: { result: ToolResultView; bare?: boolean }) {
   return (
-    <article className="rounded-card border border-line bg-white p-5 sm:p-8" aria-live="polite">
-      <h2 className="text-2xl font-extrabold leading-tight text-ink">{result.title}</h2>
+    <article className={bare ? "" : "rounded-card border border-line bg-white p-5 sm:p-8"} aria-live="polite">
+      <h2 className={bare ? "text-xl font-extrabold leading-tight text-ink" : "text-2xl font-extrabold leading-tight text-ink"}>
+        {result.title}
+      </h2>
       {result.summary && <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink-400">{result.summary}</p>}
 
       <div className="mt-6 space-y-8">
