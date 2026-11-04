@@ -68,7 +68,7 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8 lg:py-14">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8 lg:py-10">
         <div className="relative z-10 flex flex-col lg:col-span-7">
           <p className="text-[0.875rem] text-cyan">Free Recruiter Toolkit, built by Rattan Saini</p>
           <h1 className="mt-3 font-display text-[2.125rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.25rem]">
@@ -79,9 +79,9 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
             the Boolean Builder in miniature. Sign in and all seven tools are yours, free for 7 days.
           </p>
 
-          <fieldset className="mt-6">
+          <fieldset className="mt-5">
             <legend className="text-sm font-semibold text-white">What does the JD ask for?</legend>
-            <div className="mt-2.5 flex flex-wrap gap-2">
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
               {SPHERE_SKILLS.map((s) => {
                 const on = selected.includes(s);
                 return (
@@ -91,7 +91,7 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
                     aria-pressed={on}
                     onClick={() => toggle(s)}
                     className={cn(
-                      "inline-flex h-9 items-center gap-1.5 rounded-pill border px-3.5 text-sm font-medium transition-[background-color,border-color,color,transform] duration-150 active:scale-95",
+                      "inline-flex h-9 items-center gap-1 rounded-pill border px-3 text-[0.8125rem] font-medium transition-[background-color,border-color,color,transform] duration-150 active:scale-95",
                       on
                         ? "border-cyan bg-cyan/15 text-white"
                         : "border-line-navy bg-ink-800 text-ink-300 hover:border-ink-600 hover:text-white"
@@ -155,7 +155,7 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
             </pre>
           </div>
 
-          <div className="mt-6">{children}</div>
+          <div className="mt-5">{children}</div>
         </div>
 
         <div className="relative -mx-5 sm:mx-0 lg:col-span-5">
