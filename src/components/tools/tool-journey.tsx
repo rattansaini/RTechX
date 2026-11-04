@@ -60,7 +60,7 @@ function TiltCard({ tool, wide = false }: { tool: Tool; wide?: boolean }) {
       <div className="relative flex items-start justify-between gap-4 [transform:translateZ(30px)]">
         <span
           className={cn(
-            "font-display text-5xl font-extrabold leading-none tabular-nums",
+            "font-display text-4xl font-extrabold leading-none tabular-nums",
             wide ? "text-cyan" : "text-blue-200"
           )}
         >
@@ -80,8 +80,8 @@ function TiltCard({ tool, wide = false }: { tool: Tool; wide?: boolean }) {
       </p>
       <h3
         className={cn(
-          "relative mt-1 font-display text-2xl font-extrabold leading-tight [transform:translateZ(20px)]",
-          wide ? "text-white sm:text-3xl" : "text-ink"
+          "relative mt-1 font-display text-xl font-extrabold leading-tight [transform:translateZ(20px)]",
+          wide ? "text-white sm:text-2xl" : "text-ink"
         )}
       >
         {tool.name}
