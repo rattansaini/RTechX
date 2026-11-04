@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { liveCourses } from "@/content/courses";
+import { tools } from "@/content/tools";
 import { site } from "@/lib/site";
 
 /**
@@ -15,6 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/courses`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/coaching`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${base}/tools`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
+    ...tools.map((t) => ({
+      url: `${base}/tools/${t.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     { url: `${base}/free-resources`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },

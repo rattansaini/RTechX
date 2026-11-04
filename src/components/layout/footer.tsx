@@ -13,6 +13,7 @@ const columns = [
         label: c.shortTitle,
       })),
       { href: "/coaching", label: "1:1 Coaching" },
+      { href: "/tools", label: "Free Recruiter Toolkit" },
       { href: "/courses", label: "All courses" },
       { href: "/free-resources", label: "Free Boolean cheat-sheet" },
     ],

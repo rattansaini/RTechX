@@ -85,6 +85,7 @@ export const nav: {
   primary: [
     { href: "/courses", label: "Courses" },
     { href: "/coaching", label: "1:1 Coaching", tag: "New" },
+    { href: "/tools", label: "Free tools" },
     { href: "/free-resources", label: "Free resources" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },

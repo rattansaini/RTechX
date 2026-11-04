@@ -66,6 +66,18 @@ export default function PrivacyPage() {
         <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
       </p>
 
+      <h2>Free Recruiter Toolkit</h2>
+      <p>
+        When you sign in to the toolkit we store your email address, the date your
+        free access started and ends, and a count of how many times you used each
+        tool each day (to apply the daily limit). We do not store the job
+        descriptions, resumes or other text you paste into a tool, or the answers
+        the tools give. Please remove candidates&rsquo; names and contact details
+        before pasting a resume. You can delete your toolkit account yourself from
+        any tool page, or ask us at{" "}
+        <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+      </p>
+
       <h2>Who processes it for us</h2>
       <ul>
         <li>
@@ -81,7 +93,13 @@ export default function PrivacyPage() {
           call time. It receives your name and email.
         </li>
         <li>
-          <strong>Resend</strong> &mdash; sends your confirmation and joining emails.
+          <strong>Resend</strong> &mdash; sends your confirmation and joining emails,
+          and your toolkit sign-in codes.
+        </li>
+        <li>
+          <strong>Anthropic (Claude)</strong> &mdash; the AI behind the toolkit. The
+          text you paste into an AI tool is sent to Anthropic to produce the answer,
+          subject to their own privacy policy. Their servers may be outside India.
         </li>
         <li>
           <strong>n8n</strong> &mdash; our internal workflow tool. When you submit a
@@ -128,6 +146,11 @@ export default function PrivacyPage() {
         The site sets no advertising cookies unless you consent. Campaign attribution
         uses your browser&rsquo;s session storage, which is cleared when you close
         the tab and is not shared across sites.
+      </p>
+      <p>
+        If you sign in to the Free Recruiter Toolkit, one essential cookie keeps
+        you signed in for up to 30 days. It holds no personal details and is
+        removed when you sign out.
       </p>
 
       <h2>Children</h2>
