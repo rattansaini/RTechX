@@ -98,8 +98,10 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Anthropic (Claude)</strong> &mdash; the AI behind the toolkit. The
-          text you paste into an AI tool is sent to Anthropic to produce the answer,
-          subject to their own privacy policy. Their servers may be outside India.
+          text you paste into an AI tool is sent to Anthropic, through Netlify&rsquo;s
+          AI Gateway, to produce the answer, subject to their privacy policies.
+          Netlify says its gateway does not store prompts or answers. Their servers
+          may be outside India.
         </li>
         <li>
           <strong>n8n</strong> &mdash; our internal workflow tool. When you submit a

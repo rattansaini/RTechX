@@ -5,6 +5,11 @@ import { z } from "zod";
  * Calls Claude through the Messages API with plain fetch (no SDK, so no new
  * dependency). Every tool asks for the same JSON shape, which the page renders
  * with one component.
+ *
+ * On Netlify, the AI Gateway injects ANTHROPIC_API_KEY and ANTHROPIC_BASE_URL
+ * automatically and bills usage to Netlify credits. The gateway key only works
+ * against the gateway URL, so the base URL must be honoured. Setting your own
+ * ANTHROPIC_API_KEY (and no base URL) calls Anthropic directly instead.
  */
 
 export const DEFAULT_MODEL = "claude-haiku-5-5";
@@ -54,7 +59,8 @@ export async function callClaude(opts: { system: string; user: string; maxTokens
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new AiError("The AI tools aren't switched on yet.");
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/+$/, "");
+  const res = await fetch(`${base}/v1/messages`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
