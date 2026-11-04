@@ -91,7 +91,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
 
       {/* Footer strip: how it was built, next tool, build your own */}
       <div className="mt-6 grid gap-5 lg:grid-cols-3">
-        <details className="group rounded-[16px] border border-line bg-white p-5 lg:col-span-2">
+        <details className="group self-start rounded-[16px] border border-line bg-white p-5 lg:col-span-2">
           <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-ink">
             <Hammer className="size-4 text-cyan-ink" aria-hidden="true" />
             How I built this
