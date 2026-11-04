@@ -60,6 +60,29 @@ export async function callClaude(opts: {
   system: string;
   user: string;
   maxTokens?: number;
+  brief?: boolean;
+}): Promise<ToolResult> {
+  try {
+    return await callClaudeOnce(opts);
+  } catch (err) {
+    // An answer that runs past its length budget gets one retry with a firm
+    // instruction to halve it, so the visitor isn't asked to shorten their JD.
+    if (err instanceof TooLongError) {
+      return callClaudeOnce({
+        ...opts,
+        system: `${opts.system}\n\nIMPORTANT: your previous answer was too long and was cut off. Give half as much detail this time: fewer rows, shorter cells, no section longer than 120 words.`,
+      });
+    }
+    throw err;
+  }
+}
+
+class TooLongError extends AiError {}
+
+async function callClaudeOnce(opts: {
+  system: string;
+  user: string;
+  maxTokens?: number;
   /** Shorter answers — used inside the Copilot so three steps fit in time. */
   brief?: boolean;
 }): Promise<ToolResult> {
@@ -76,7 +99,7 @@ export async function callClaude(opts: {
     },
     body: JSON.stringify({
       model: process.env.ANTHROPIC_MODEL || DEFAULT_MODEL,
-      max_tokens: opts.maxTokens ?? (opts.brief ? 3000 : 6000),
+      max_tokens: opts.maxTokens ?? (opts.brief ? 5000 : 6000),
       system: `${opts.system}\n\n${OUTPUT_RULES}${
         opts.brief ? "\nThis is one step of a larger report: keep this answer under about 450 words." : ""
       }`,
@@ -95,7 +118,7 @@ export async function callClaude(opts: {
   const text = (data.content ?? []).filter((c) => c.type === "text").map((c) => c.text ?? "").join("");
   if (data.stop_reason === "max_tokens") {
     console.error("[tools ai] answer hit max_tokens; length", text.length);
-    throw new AiError("The answer was too long to finish. Try a shorter JD, or paste only the key part.");
+    throw new TooLongError("The answer ran long and was cut off. Please press the button again.");
   }
   return parseResult(text);
 }

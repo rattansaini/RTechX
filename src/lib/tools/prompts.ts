@@ -92,12 +92,36 @@ export function runSingleTool(slug: SingleToolSlug, input: Record<string, string
  * passed to steps 2 and 3, which run in parallel. The three results are merged
  * into one report.
  */
+/**
+ * The Copilot's own, compact versions of the three steps. The full tools give
+ * long answers; inside one combined report each step must stay short or the
+ * whole run is cut off.
+ */
+const COPILOT = {
+  decode: `${ROLE}
+Task: step 1 of 3 of a recruiter's agent — decode the JD, briefly.
+Sections, exactly these:
+1. "Must-haves" — table: Requirement | Evidence to look for. At most 6 rows; each cell under 15 words.
+2. "Wish-list" — at most 5 short bullets.
+3. "Questions for the hiring manager" — at most 4 short bullets.
+No glossary, no other sections. Summary: 2 sentences.`,
+  search: `${ROLE}
+Task: step 2 of 3 — write search strings from the decoded must-haves.
+Sections, exactly these:
+1. "Search strings" — three "code" items: "LinkedIn", "Naukri Resdex", "Google X-ray (site:linkedin.com/in)". At most 8 OR terms in any group. Use the location if given.
+2. "How the string works" — at most 4 bullets, one line each.
+No other sections. Summary: 1 sentence.`,
+  screen: `${ROLE}
+Task: step 3 of 3 — a 20-minute screening call plan from the decoded must-haves.
+Sections, exactly these:
+1. "Call plan" — table: Minutes | What to cover. 5 rows.
+2. "Must-have questions" — table: Question | A strong answer mentions. At most 5 rows; each cell under 18 words.
+3. "Red flags" — at most 4 short bullets.
+No other sections. Summary: 1 sentence.`,
+} as const;
+
 export async function runCopilot(input: Record<string, string>): Promise<ToolResult> {
-  const decoded = await callClaude({
-    system: PROMPTS["jd-decoder"],
-    user: userMessage("jd-decoder", { jd: input.jd }),
-    brief: true,
-  });
+  const decoded = await callClaude({ system: COPILOT.decode, user: block("jd", input.jd), brief: true });
   const brief = [
     `Decoded summary: ${decoded.summary ?? ""}`,
     ...decoded.sections.slice(0, 2).map((s) =>
@@ -112,12 +136,12 @@ export async function runCopilot(input: Record<string, string>): Promise<ToolRes
 
   const [search, kit] = await Promise.all([
     callClaude({
-      system: PROMPTS["boolean-builder"],
+      system: COPILOT.search,
       user: [block("jd", input.jd), block("decoded_requirements", brief), block("location", input.location)].join("\n\n"),
       brief: true,
     }),
     callClaude({
-      system: PROMPTS["screening-kit"],
+      system: COPILOT.screen,
       user: [block("jd", input.jd), block("decoded_requirements", brief)].join("\n\n"),
       brief: true,
     }),
@@ -129,9 +153,9 @@ export async function runCopilot(input: Record<string, string>): Promise<ToolRes
     summary:
       "The Copilot decoded the JD first, then used those must-haves to write the search strings and the screening kit. Check each step — you know your hiring manager; the agent doesn't.",
     sections: [
-      ...tag("Step 1 Decode", decoded).slice(0, 5),
-      ...tag("Step 2 Search", search).slice(0, 5),
-      ...tag("Step 3 Screen", kit).slice(0, 4),
+      ...tag("Step 1 Decode", decoded).slice(0, 3),
+      ...tag("Step 2 Search", search).slice(0, 2),
+      ...tag("Step 3 Screen", kit).slice(0, 3),
     ].slice(0, 14),
     note: "Built as a working example of an AI agent: one step's output feeds the next. Learn to build your own in Track 3 of 1:1 Coaching.",
   };
