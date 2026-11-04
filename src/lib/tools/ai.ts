@@ -46,6 +46,7 @@ Reply with ONE JSON object and nothing else — no markdown fences, no text befo
 Shape:
 {"title": string, "summary": string (2–3 sentences), "sections": [{"heading": string, "text"?: string, "bullets"?: string[], "code"?: [{"label": string, "value": string}], "table"?: {"headers": string[], "rows": string[][]}}], "note"?: string}
 Use "code" only for search strings or text the user will copy. Keep tables to 6 columns or fewer.
+Be compact: keep the whole answer under about 900 words, table cells under 25 words, and no more than 12 rows in any table.
 House rules (RTechX):
 - Indian English, short sentences, plain words. Explain jargon the first time.
 - Never invent facts about a candidate, company, salary or market. If something is not in the input, say it is not stated.
@@ -55,7 +56,13 @@ House rules (RTechX):
 
 export class AiError extends Error {}
 
-export async function callClaude(opts: { system: string; user: string; maxTokens?: number }): Promise<ToolResult> {
+export async function callClaude(opts: {
+  system: string;
+  user: string;
+  maxTokens?: number;
+  /** Shorter answers — used inside the Copilot so three steps fit in time. */
+  brief?: boolean;
+}): Promise<ToolResult> {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new AiError("The AI tools aren't switched on yet.");
 
@@ -69,8 +76,10 @@ export async function callClaude(opts: { system: string; user: string; maxTokens
     },
     body: JSON.stringify({
       model: process.env.ANTHROPIC_MODEL || DEFAULT_MODEL,
-      max_tokens: opts.maxTokens ?? 2200,
-      system: `${opts.system}\n\n${OUTPUT_RULES}`,
+      max_tokens: opts.maxTokens ?? (opts.brief ? 2600 : 4096),
+      system: `${opts.system}\n\n${OUTPUT_RULES}${
+        opts.brief ? "\nThis is one step of a larger report: keep this answer under about 450 words." : ""
+      }`,
       messages: [{ role: "user", content: opts.user }],
     }),
   });
@@ -82,8 +91,12 @@ export async function callClaude(opts: { system: string; user: string; maxTokens
     throw new AiError("The AI couldn't answer just now. Please try again.");
   }
 
-  const data = (await res.json()) as { content?: { type: string; text?: string }[] };
+  const data = (await res.json()) as { content?: { type: string; text?: string }[]; stop_reason?: string };
   const text = (data.content ?? []).filter((c) => c.type === "text").map((c) => c.text ?? "").join("");
+  if (data.stop_reason === "max_tokens") {
+    console.error("[tools ai] answer hit max_tokens; length", text.length);
+    throw new AiError("The answer was too long to finish. Try a shorter JD, or paste only the key part.");
+  }
   return parseResult(text);
 }
 

@@ -16,7 +16,7 @@ Task: decode a technical job description for a recruiter.
 Sections, in this order:
 1. "Must-haves" — the 4–6 requirements the role cannot do without, each with one line on why. Use a table: Requirement | Why it matters | Evidence to look for on a resume.
 2. "Wish-list" — bullets of nice-to-haves a strong candidate may lack.
-3. "Plain-English glossary" — a table: Term | What it is | How a recruiter should think about it. Cover every technology, framework, cloud, tool and acronym in the JD.
+3. "Plain-English glossary" — a table: Term | What it is | How a recruiter should think about it. Cover the 8–12 most important technologies, tools and acronyms in the JD; one short sentence per cell.
 4. "Related skills and titles" — bullets of adjacent skills and alternative job titles to search for.
 5. "Questions for the hiring manager" — 4–6 intake questions to clarify vague or conflicting points.
 6. "Red flags in this JD" — unrealistic combinations, missing information, or ranges that conflict. Say "None found" if none.`,
@@ -93,7 +93,11 @@ export function runSingleTool(slug: SingleToolSlug, input: Record<string, string
  * into one report.
  */
 export async function runCopilot(input: Record<string, string>): Promise<ToolResult> {
-  const decoded = await runSingleTool("jd-decoder", { jd: input.jd });
+  const decoded = await callClaude({
+    system: PROMPTS["jd-decoder"],
+    user: userMessage("jd-decoder", { jd: input.jd }),
+    brief: true,
+  });
   const brief = [
     `Decoded summary: ${decoded.summary ?? ""}`,
     ...decoded.sections.slice(0, 2).map((s) =>
@@ -110,10 +114,12 @@ export async function runCopilot(input: Record<string, string>): Promise<ToolRes
     callClaude({
       system: PROMPTS["boolean-builder"],
       user: [block("jd", input.jd), block("decoded_requirements", brief), block("location", input.location)].join("\n\n"),
+      brief: true,
     }),
     callClaude({
       system: PROMPTS["screening-kit"],
       user: [block("jd", input.jd), block("decoded_requirements", brief)].join("\n\n"),
+      brief: true,
     }),
   ]);
 
