@@ -260,7 +260,7 @@ Day 3, over WhatsApp or email. The confirmation email, `/thank-you` and the
 course page all describe exactly that — if the process changes, those need
 changing with it or the site promises something that does not happen.
 
-Note the 1+1 bonus doubles the send list: 20 paid seats can mean up to 40
+Note: the 1+1 bonus was withdrawn on 4 Nov 2026. While it ran, 20 paid seats could mean up to 40
 people expecting the handbook.
 
 ---|---|---|
@@ -281,7 +281,7 @@ The site's confirmation email, `/thank-you` page and the Bonuses section on the
 course page all describe exactly this sequence — if the process changes, those
 need changing with it or the site is promising something that does not happen.
 
-Note the 1+1 bonus doubles the send list: 20 paid seats can mean up to 40
+Note: the 1+1 bonus was withdrawn on 4 Nov 2026. While it ran, 20 paid seats could mean up to 40
 people expecting all three files.
 
 If this needs automating later, the options considered were: a triggered email

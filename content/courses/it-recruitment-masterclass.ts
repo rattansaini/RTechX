@@ -176,8 +176,9 @@ export const itRecruitmentMasterclass: Course = {
   // The Field Kit and the Resume Playbook used to sit here. Both are now free
   // public downloads on /free-resources, so presenting them as buyer-only
   // extras would be a straightforward lie — anyone can have them without
-  // paying. What remains is the one thing a buyer genuinely gets that a
-  // visitor cannot: a second seat.
+  // paying. The "1+1 — bring a friend" second seat was withdrawn on
+  // 4 Nov 2026 at Rattan's request; it stays here switched off so it can be
+  // brought back by flipping `available`.
   //
   // The rest moved into `inclusions`, which is the honest home for it: things
   // the course comes with, not a bonus stack inflating the offer.
@@ -191,7 +192,7 @@ export const itRecruitmentMasterclass: Course = {
         "They get the recordings and the materials too",
         "Easier to practise sourcing when someone else is doing it alongside you",
       ],
-      available: true,
+      available: false,
     },
   ],
 
