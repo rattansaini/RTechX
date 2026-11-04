@@ -68,20 +68,20 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-5 pb-14 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-6 lg:px-8 lg:pb-20 lg:pt-20">
-        <div className="relative z-10 flex flex-col">
-          <p className="text-[0.9375rem] text-cyan">Free Recruiter Toolkit, built by Rattan Saini</p>
-          <h1 className="mt-4 font-display text-[2.5rem] font-extrabold leading-[1.02] tracking-[-0.02em] text-white sm:text-[3.5rem] lg:text-[4rem]">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8 lg:py-14">
+        <div className="relative z-10 flex flex-col lg:col-span-7">
+          <p className="text-[0.875rem] text-cyan">Free Recruiter Toolkit, built by Rattan Saini</p>
+          <h1 className="mt-3 font-display text-[2.125rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.25rem]">
             Seven tools that think like a recruiter.
           </h1>
-          <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed sm:text-lg">
+          <p className="mt-4 max-w-xl text-[1rem] leading-relaxed sm:text-[1.0625rem]">
             Tap the skills a JD asks for. Watch the Boolean string write itself and the talent pool narrow — that&rsquo;s
             the Boolean Builder in miniature. Sign in and all seven tools are yours, free for 7 days.
           </p>
 
-          <fieldset className="mt-8">
+          <fieldset className="mt-6">
             <legend className="text-sm font-semibold text-white">What does the JD ask for?</legend>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-2.5 flex flex-wrap gap-2">
               {SPHERE_SKILLS.map((s) => {
                 const on = selected.includes(s);
                 return (
@@ -91,7 +91,7 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
                     aria-pressed={on}
                     onClick={() => toggle(s)}
                     className={cn(
-                      "inline-flex h-10 items-center gap-1.5 rounded-pill border px-4 text-[0.9375rem] font-medium transition-[background-color,border-color,color,transform] duration-150 active:scale-95",
+                      "inline-flex h-9 items-center gap-1.5 rounded-pill border px-3.5 text-sm font-medium transition-[background-color,border-color,color,transform] duration-150 active:scale-95",
                       on
                         ? "border-cyan bg-cyan/15 text-white"
                         : "border-line-navy bg-ink-800 text-ink-300 hover:border-ink-600 hover:text-white"
@@ -105,8 +105,8 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
             </div>
           </fieldset>
 
-          <div className="mt-6 overflow-hidden rounded-card border border-line-navy bg-ink-800/80 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur">
-            <div className="flex items-center justify-between gap-3 border-b border-line-navy px-4 py-2.5">
+          <div className="mt-5 overflow-hidden rounded-card border border-line-navy bg-ink-800/80 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur">
+            <div className="flex items-center justify-between gap-3 border-b border-line-navy px-4 py-2">
               <div role="tablist" aria-label="Where you will search" className="flex gap-1">
                 {(
                   [
@@ -149,24 +149,24 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
             </div>
             <pre
               aria-live="polite"
-              className="min-h-[5.5rem] whitespace-pre-wrap break-words px-4 py-3.5 font-mono text-[0.8125rem] leading-relaxed"
+              className="min-h-[4.25rem] whitespace-pre-wrap break-words px-4 py-3 font-mono text-[0.78rem] leading-relaxed"
             >
               {string ? <Highlighted text={string} /> : <span className="text-ink-300">Pick at least one skill.</span>}
             </pre>
           </div>
 
-          <div className="mt-8">{children}</div>
+          <div className="mt-6">{children}</div>
         </div>
 
-        <div className="relative -mx-5 sm:mx-0 lg:sticky lg:top-24 lg:self-start">
-          <div className="relative mx-auto aspect-square w-full max-w-[34rem]">
+        <div className="relative -mx-5 sm:mx-0 lg:col-span-5">
+          <div className="relative mx-auto aspect-square w-full max-w-[26rem]">
             <TalentSphere selected={selected} />
           </div>
-          <div className="-mt-4 flex flex-col items-center gap-1 text-center">
+          <div className="-mt-6 flex flex-col items-center gap-0.5 text-center">
             <div className="contents">
-              <p aria-live="polite" className="font-display text-3xl font-extrabold tabular-nums text-white sm:text-4xl">
+              <p aria-live="polite" className="font-display text-2xl font-extrabold tabular-nums text-white sm:text-3xl">
                 {matches}
-                <span className="text-lg font-semibold text-ink-300"> of {POOL_SIZE}</span>
+                <span className="text-base font-semibold text-ink-300"> of {POOL_SIZE}</span>
               </p>
               <p className="text-sm text-ink-300">
                 {selected.length ? "profiles match every skill" : "profiles in the pool"}

@@ -61,9 +61,9 @@ export default async function ToolsPage() {
 
       {/* The seven tools, in the order a requirement actually moves. */}
       <section id="journey" className="scroll-mt-20 bg-paper">
-        <Container className="py-16 sm:py-24">
+        <Container className="py-14 sm:py-20">
           <div className="max-w-2xl">
-            <h2 className="font-display text-[2rem] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink sm:text-[2.75rem]">
+            <h2 className="font-display text-[1.75rem] font-extrabold leading-[1.15] text-ink sm:text-4xl">
               One requirement, start to finish.
             </h2>
             <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink-400">
@@ -81,7 +81,7 @@ export default async function ToolsPage() {
       <section id="sign-in" className="scroll-mt-20 border-y border-line bg-white">
         <Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
-            <h2 className="font-display text-[2rem] font-extrabold leading-[1.08] text-ink sm:text-[2.5rem]">
+            <h2 className="font-display text-[1.75rem] font-extrabold leading-[1.15] text-ink sm:text-4xl">
               {access.state === "active" ? "You're in." : "Seven days, on the house."}
             </h2>
             <ul className="mt-6 space-y-3">
@@ -114,9 +114,9 @@ export default async function ToolsPage() {
 
       {/* How they were built — and the offer to teach it */}
       <section className="relative overflow-hidden bg-paper">
-        <Container className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
+        <Container className="grid gap-12 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
           <div>
-            <h2 className="font-display text-[2rem] font-extrabold leading-[1.08] text-ink sm:text-[2.75rem]">
+            <h2 className="font-display text-[1.75rem] font-extrabold leading-[1.15] text-ink sm:text-4xl">
               Designed by a recruiter. Built with AI.
             </h2>
             <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ink-400">
