@@ -8,6 +8,7 @@ import { HomeHero } from "@/components/marketing/hero";
 import { InstructorTeaser } from "@/components/marketing/instructor-teaser";
 import { PainStrip } from "@/components/marketing/pain-strip";
 import { StatBand } from "@/components/marketing/stat-band";
+import { ToolkitBand } from "@/components/marketing/toolkit-band";
 import { WhyRTechX } from "@/components/marketing/why-rtechx";
 import type { Metadata } from "next";
 import { flagshipCourse } from "@/content/courses";
@@ -29,6 +30,7 @@ export default function HomePage() {
       <AiObjection />
       <WhyRTechX />
       <CataloguePreview />
+      <ToolkitBand />
       <InstructorTeaser />
       <FreeResourceBand />
       {/* Short FAQ here; the full set lives on the course page. */}
