@@ -158,11 +158,13 @@ export function ToolkitHero({ children }: { children: React.ReactNode }) {
           <div className="mt-8">{children}</div>
         </div>
 
-        <div className="relative -mx-5 sm:mx-0">
+        <div className="relative -mx-5 sm:mx-0 lg:sticky lg:top-24 lg:self-start">
           <div className="relative mx-auto aspect-square w-full max-w-[34rem]">
             <TalentSphere selected={selected} />
-            <div className="pointer-events-none absolute inset-x-0 bottom-2 flex flex-col items-center gap-1 text-center">
-              <p className="font-display text-3xl font-extrabold tabular-nums text-white sm:text-4xl">
+          </div>
+          <div className="-mt-4 flex flex-col items-center gap-1 text-center">
+            <div className="contents">
+              <p aria-live="polite" className="font-display text-3xl font-extrabold tabular-nums text-white sm:text-4xl">
                 {matches}
                 <span className="text-lg font-semibold text-ink-300"> of {POOL_SIZE}</span>
               </p>

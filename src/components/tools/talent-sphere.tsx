@@ -102,6 +102,9 @@ export function TalentSphere({ selected, className }: { selected: readonly Spher
     if (!ctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Canvas can't read CSS variables, so resolve the brand mono font once.
+    const monoFamily =
+      getComputedStyle(document.documentElement).getPropertyValue("--font-jetbrains").trim() || "ui-monospace, monospace";
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -224,7 +227,7 @@ export function TalentSphere({ selected, className }: { selected: readonly Spher
 
       // label the three front-most matches with their skills
       if (sel.length) {
-        ctx.font = "500 11px var(--font-jetbrains), ui-monospace, monospace";
+        ctx.font = `500 11px ${monoFamily}`;
         ctx.textBaseline = "middle";
         const labelled = order
           .filter((i) => projected[i].hit && projected[i].z > 0.35)
